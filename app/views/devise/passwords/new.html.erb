@@ -1,0 +1,79 @@
+
+<div>
+  <nav class="navbar bg-light custom-nav shadow-sm  bg-body">
+    <div class="container-fluid" style= "width: 50%">
+      <a href = "/">
+        <%= image_tag 'https://i.imgur.com/wvLiKam.png', size: "120x58" , class:"navbar-brand" %>
+      </a>
+    </div>
+  </nav>
+  <div class = "container pt-5 mt-5">
+    <div class="login ">
+      <div class = "inner-login">
+          <div class = "py-4 text-center">
+            <%= image_tag 'forgot-password-icon-0.jpg', size: "100x100"%>
+          </div>
+          <div class = "password-reset-instructions">
+            <h2 style = "font-size: 16px">Trouble Logging In?</h2>
+            <p>
+              Enter your email, phone, or username and we'll send you a link to get back into your account.
+            </p>
+          </div>
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="">
+              <%   f.label :username %>
+              <%= f.text_field :username, autofocus: true , placeholder: "Username or Email"%>
+            </div>
+
+            <div class="actions">
+              <%= f.submit "Send Login Link" %>
+            </div>
+          <% end %>
+          <div class = "text-center">
+            <a class= "cant-reset-password">Cant reset your password?</a>
+            <div class="divider"><b>OR</b></div>
+
+            <h6 class = "pt-2">Create New Account</h6>
+
+            <div class = "link">
+              <%= render "devise/shared/sign_up"%>
+            </div>
+
+          </div>
+      </div>
+
+      <div class="infobox">
+        <p>
+            Have an account?
+            <%= render "devise/shared/log_in"%>
+        </p>
+      </div>
+
+
+    </div>
+    <div class="footer">
+        <p>
+            <a href="https://www.instagram.com/about/us/">Meta</a>
+            <a href="https://www.instagram.com/about/us/">About</a>
+            <a href="https://www.instagram.com/about/us/">Blog</a>
+            <a href="https://help.instagram.com/">Jobs</a>
+            <a href="https://instagram-press.com/">Help</a>
+            <a href="https://www.instagram.com/developer/">API</a>
+            <a href="https://help.instagram.com/519522125107875">Privacy</a>
+            <a href="https://help.instagram.com/581066165581870">Terms</a>
+            <a href="https://www.instagram.com/explore/locations/">Top Accounts</a>
+            <a href="https://www.instagram.com/explore/locations/">Hashtags</a>
+            <a href="https://www.instagram.com/explore/locations/">locations</a>
+            <a href="https://www.instagram.com/explore/locations/">Instagram Lite</a>
+            <a href="https://www.instagram.com/directory/profiles/">Contact Uploading & Non-Users</a>
+        </p>
+        <p> <span>© 2022 Instagram from Meta</span> <p>
+
+      </div>
+
+  </div>
+
+</div>
+

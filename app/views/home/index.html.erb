@@ -1,0 +1,28 @@
+<h1>Instagram</h1>
+<% if user_signed_in? %>
+
+
+
+    <div class="">
+      <div class="col-sm-4">
+         <%= image_tag user_avatar(current_user, 100), class: "rounded-circle" %>
+      </div>
+    </div>
+  <div>
+    <h3> Instagram handle: <%= current_user.username %></h3>
+    <h3> Display name: <%= current_user.fullname %></h3>
+    <h3> Bio: <%= current_user.bio %></h3>
+    <h3> Website: <%= current_user.website %></h3>
+
+  </div>
+
+  <%= link_to 'Sign Out',destroy_user_session_path , method: :delete%>
+  <%= link_to 'Edit Profile', edit_user_registration_path %>
+
+
+
+<%else%>
+  <%= link_to 'Sign In', user_session_path  %>
+  <%= link_to 'Sign UP',  new_user_registration_path   %>
+
+<%end%>

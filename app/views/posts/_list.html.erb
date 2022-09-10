@@ -1,0 +1,16 @@
+  <div class = "col g-1 g-md-3 g-lg-4 square">
+    <div class = "h-100 post-container">
+      <% if list.images.exists? %>
+        <a class = "post-a">
+          <%= link_to image_tag(list.images.first ,class:"image img-fluid h-100 w-100 ", style:"object-fit: contain %"), list ,data: { turbo: 'true', turbo_frame: 'detail  '} %>
+        </a>
+      <%end%>
+      <div class = "middle">
+        <div class="text">
+          <p>Likes:0   Comments: 0</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%# dont need to check if image exists because it will always exist? %>

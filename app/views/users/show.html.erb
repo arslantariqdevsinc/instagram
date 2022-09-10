@@ -1,0 +1,29 @@
+<% if user_me?(@user) %>
+  <%= render 'user', user: @user%>
+
+  <%if @user.posts.exists? %>
+      <%= render partial: 'shared/grid', locals: {posts: @posts}%>
+  <%else%>
+    <div>
+      <h1>Start capturing and sharing your moments.</h1>
+    </div>
+  <%end%>
+
+<% else %>
+  <%= render 'other_user', user: @user%>
+
+  <%if public?(@user) %>
+    <%if @user.posts.exists?  %>
+      <%= render partial: 'shared/grid', locals: {posts: @posts}%>
+    <%else%>
+      <div>
+        <h1>User has no posts yet!</h1>
+      </div>
+    <%end%>
+  <%else%>
+      <div>
+        <h1>Profile is Private</h1>
+      </div>
+  <%end%>
+<%end%>
+

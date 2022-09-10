@@ -1,0 +1,17 @@
+<div>
+  <p>
+    <strong>Body:</strong>
+    <%= post.body %>
+  </p>
+
+  <div>
+    <% if post.images.any? %>
+        <div>
+          <% post.images.each do |image| %>
+          <%= image_tag(image, width: 400) %>
+          <% end %>
+        </div>
+    <%end%>
+  </div>
+</div>
+<%= link_to "Edit this post", edit_post_path(post) %>
