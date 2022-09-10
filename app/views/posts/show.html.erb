@@ -4,11 +4,7 @@
 
   <%= turbo_stream_from @post, :comments %>
   <%= tag.div id: "#{dom_id(@post)}_comments" do %>
-    <div class = "pt-5">
-      <h4>Comments: </h4>
-
-      <%=render partial: 'comments/comment_with_replies', collection: @post.comments, as: :comment%>
-    </div>
+    <%= render @post.comments %>
   <%end%>
 
   <%= render partial: 'comments/form', locals: {parent_id: nil, post: @post, comment: Comment.new} %>

@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
-    # @parent = Comment.find(params[:parent_id])
+
 
     respond_to do |format|
       if @comment.save

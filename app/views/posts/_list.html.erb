@@ -2,7 +2,7 @@
     <div class = "h-100 post-container">
       <% if list.images.exists? %>
         <a class = "post-a">
-          <%= link_to image_tag(list.images.first ,class:"image img-fluid h-100 w-100 ", style:"object-fit: contain %"), list ,data: { turbo: 'true', turbo_frame: 'detail  '} %>
+          <%= link_to image_tag(list.images.first ,class:"image img-fluid h-100 w-100 ", style:"object-fit: contain %"), list ,data: { turbo: 'true', turbo_frame: 'detail'} %>
         </a>
       <%end%>
       <div class = "middle">

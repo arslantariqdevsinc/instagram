@@ -1,11 +1,6 @@
 <% model = [local_assigns[:post], comment].compact %>
 
-<%= form_with(model: model,
- id: dom_id_for_records(*model),
-data: local_assigns[:data],
-class: ['my-4', local_assigns[:class]]) do |form| %>
-
-
+<%= form_with(model: model, id: dom_id_for_records(*model), data: {turbo: true}) do |form| %>
 
   <% if comment.errors.any? %>
     <div id="error_explanation">
@@ -18,7 +13,7 @@ class: ['my-4', local_assigns[:class]]) do |form| %>
       </ul>
     </div>
   <% end %>
-  <%= form.hidden_field :parent_id, value: local_assigns[:parent_id] %>
+
   <div class="field">
     <%= form.label :body %>
     <%= form.text_area :body %>

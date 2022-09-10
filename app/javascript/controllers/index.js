@@ -4,8 +4,6 @@
 
 import { application } from "./application"
 
-import CommentReplyController from "./comment_reply_contoller"
-application.register("comment-reply", CommentReplyController)
 
 import TurboModalController from "./turbo_modal_controller"
 application.register("turbo-modal", TurboModalController)

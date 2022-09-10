@@ -23,6 +23,7 @@ class Comment < ApplicationRecord
 
   after_update_commit do
     broadcast_replace_to self
+
   end
 
 end
