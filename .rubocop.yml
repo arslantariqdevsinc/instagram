@@ -6,7 +6,7 @@ require:
 
 AllCops:
   # Exclude auto-generated files by Rails
-  TargetRubyVersion: 2.7
+  TargetRubyVersion: 2.6.6
   TargetRailsVersion: 5.2
   Exclude:
     - 'db/schema.rb'

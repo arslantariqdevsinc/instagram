@@ -1,0 +1,36 @@
+<div class="sidebar-menu-container">
+  <div class = "sidebar-card sidebar-header ">
+    <div class="d-flex justify-content-between align-items-center pb-2">
+      <div class = "d-flex">
+        <%=render partial: 'shared/avatar', locals: {user: user, size: 80}%>
+        <div class = "d-flex justify-content-between align-items-center">
+          <div class = "px-2">
+            <p class="sidebar-title card-title">
+              <%= user.username %>
+            </p>
+            <p class="card-subtitle sidebar-subtitle"><%=user.fullname%></p>
+          </div>
+        </div>
+      </div>
+      <span class="sidebar-btn">
+        <%=link_to edit_user_registration_path(user) do%>
+          Change
+        <%end%>
+      </span>
+    </div>
+
+    <div class = "d-flex justify-content-between">
+     <p class = "suggestions-title text-muted py-3">Suggestions For You</p>
+     <p class = "suggestions-title py-3">See all</p>
+    </div>
+
+    <div>
+      <%=render partial: "shared/suggestion", collection: suggestions, as: :user%>
+    </div>
+    <hr/>
+
+
+  </div>
+
+
+ </div>

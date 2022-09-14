@@ -1,3 +1,31 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.profile-stats{
+  font-size: large;
+  ul{
+    padding:0;
+    list-style-type: none;
+    li{
+      p{
+        font-size: medium;
+        a{
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.profile-real-name{
+  font-size: medium;
+  font-weight: bolder;
+}
+
+
+
+
+
+
+

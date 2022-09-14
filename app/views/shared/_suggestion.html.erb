@@ -1,0 +1,8 @@
+<div class="d-flex justify-content-between align-items-center py-2">
+  <%= render partial: "shared/user_info", locals: {user: user, subtitle: "Suggested for you"}%>
+  <span class="sidebar-btn">
+    <%= link_to user_path(user) do %>
+      Follow
+    <%end%>
+  </span>
+</div>

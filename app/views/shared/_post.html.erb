@@ -1,0 +1,53 @@
+<div class="card-wrapper flex-container mb-4">
+  <div class="card-header grid">
+    <div class="header-img-container flex-container">
+          <%=render partial: 'shared/avatar', locals: {user: post.user, size: 40}%>
+    </div>
+    <p class="card-title">
+      <%= post.user.username %>
+    </p>
+    <div class="card-opt-btn flex-container">
+    <i class="bi bi-three-dots"></i>
+    </div>
+  </div>
+  <div class="card-img-container d-flex justify-content-center">
+    <%= image_tag(post.images.first, class: "img-fluid")%>
+  </div>
+  <div class="card-data flex-container">
+    <div class="card-icons flex-container">
+    <span  class="card-icon card-icon-left">
+      <div id="like-button-<%= post.id %>">
+        <%= render 'likes/like', likeable: post %>
+      </div>
+    </span>
+    <span class="card-icon card-icon-left pb-4">
+        <i class="bi bi-chat"></i>
+    </span>
+      <span class="card-icon card-icon-left pb-4">
+        <i class="bi bi-send"></i>
+    </span>
+    <span class="card-icon card-icon-right pb-4"><i class="bi bi-bookmark"></i></span>
+    </div>
+    <span class="card-text"><span class="bold title-margin"><%= post.user.username %></span><%=post.body%></span>
+
+    <span class="card-text comments-btn">
+      <%= link_to "See more comments",post, data:{turbo: true, turbo_frame: "detail"} %>
+    </span>
+
+    <div class = "w-100">
+      <%= turbo_stream_from post, :comments %>
+      <%= tag.div id: "#{dom_id(post)}_comments" ,style: "overflow-y: scroll; height:100px" do %>
+        <%= render post.comments %>
+      <%end%>
+    </div>
+    <span class="card-time"></span>
+    <div class="add-comment-container flex-container">
+      <span class="card-icon"><i class="bi bi-emoji-smile"></i></span>
+      <div class="comment-container">
+        <%= render partial: 'comments/form', locals: {parent_id: nil, post: post, comment: Comment.new} %>
+      </div>
+    </div>
+
+  </div>
+
+</div>

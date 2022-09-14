@@ -1,0 +1,18 @@
+<div class = "d-flex justify-content-center">
+  <div class="dropdown me-2">
+    <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false"vdata-bs-auto-close="inside" data-bs-offset="20,40">
+        <%= form_with(url: "/search", method: 'GET', data: {turbo: 'true',
+          turbo_frame: 'user_list',
+          turbo_action: 'advance',
+          controller: 'search-form'} ) do |form|%>
+            <%= form.text_field :query, data: {action: "input->search-form#search"}, class:"form-control", placeholder: "Search"%>
+        <%end%>
+    </div>
+    <ul class="dropdown-menu w-100">
+      <li><h6 class="dropdown-header">Search Results</h6></li>
+       <div>
+        <%= turbo_frame_tag 'user_list'%>
+      </div>
+    </ul>
+  </div>
+</div>

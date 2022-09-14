@@ -1,0 +1,11 @@
+<div class="dropdown">
+  <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <h4><i class="bi bi-suit-heart"></i></h4>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
+    <li><a class="dropdown-item" href="#">Follow requests</a></li>
+    <li>
+      <%= render partial: "shared/follow_requests", collection: user.follow_requests, as: :user%>
+    </li>
+  </ul>
+</div>

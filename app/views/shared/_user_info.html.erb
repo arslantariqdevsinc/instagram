@@ -1,0 +1,15 @@
+<div class= "user-info">
+  <%= link_to user_path(user) do %>
+    <div class = "d-flex ">
+      <%=render partial: 'shared/avatar', locals: {user: user, size: 40}%>
+      <div class = "d-flex justify-content-between align-items-center">
+        <div class = "px-2">
+          <p class="user-info-title">
+            <%= user.username %>
+          </p>
+          <p class="user-info-subtitle"><%=subtitle%></p>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

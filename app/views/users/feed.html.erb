@@ -1,0 +1,8 @@
+<section class = "main-content grid container d-flex", style = "width: 80%">
+  <div class = "main-gallery-wrapper col-7 px-3">
+    <%= render partial: 'shared/post', collection: @feed_posts, as: :post%>
+  </div>
+  <div class = "col px-3 sidebar">
+    <%= render partial: 'shared/sidebar', locals: {user: @user, suggestions: @suggestions}%>
+  </div>
+</section>

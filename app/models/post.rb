@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many_attached :images
   has_many :comments, dependent: :destroy
+  has_many :likes, as: :likeable
 
   validates :body, presence: true, length: { maximum: 2200 }
   validate :image_presence, :image_type

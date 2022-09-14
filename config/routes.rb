@@ -2,9 +2,11 @@ Rails.application.routes.draw do
   devise_for :users, path: 'accounts'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  resources :likes
+
   devise_scope :user do
     authenticated :user do
-      root 'home#index', as: :authenticated_root
+      root 'users#feed', as: :authenticated_root
     end
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
@@ -21,6 +23,14 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :users, only: %i[index show] do
+    member do
+      get :following, :followers
+    end
+  end
+  resources :relationships, only: %i[create destroy update]
 
-  resources :users, only: %i[index show]
+  get :search, to: 'main#search'
+
+  resources :stories
 end

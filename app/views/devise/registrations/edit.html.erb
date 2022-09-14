@@ -13,8 +13,10 @@
       </div>
     </div>
 
-    <p><%= f.label :username %><br />
-    <%= f.text_field :username %></p>
+    <div class = "">
+      <%= f.label :username %><br />
+      <%= f.text_field :username ,disabled: true, class: "form-control"%>
+    </div>
 
     <p><%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>

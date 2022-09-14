@@ -1,4 +1,4 @@
-  <div class = "col g-1 g-md-3 g-lg-4 square">
+  <div id = "post-<%= list.id %>" class = "col g-1 g-md-3 g-lg-4 square">
     <div class = "h-100 post-container">
       <% if list.images.exists? %>
         <a class = "post-a">
@@ -6,8 +6,14 @@
         </a>
       <%end%>
       <div class = "middle">
-        <div class="text">
-          <p>Likes:0   Comments: 0</p>
+        <div class="text d-flex justify-content-between">
+          <div id = "likes-post-count-<%=list.id%>">
+            <%= render partial: "posts/like_count", locals: { count: list.likes.count } %>
+          </div>
+          <div id = "comments-post-count<%=list.id%>">
+            <%= render partial: "posts/comment_count", locals: {count: list.comments.count }%>
+          </div>
+
         </div>
       </div>
     </div>

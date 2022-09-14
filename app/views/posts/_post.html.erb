@@ -1,17 +1,61 @@
-<div>
-  <p>
-    <strong>Body:</strong>
-    <%= post.body %>
-  </p>
+<%= tag.div data: { controller: "post-view" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
+  <div class="modal" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content rounded-0">
+        <div class="modal-body", style= "padding: 0;">
+          <div class = "container w-100 h-100 d-flex" style = "padding: 0">
+            <div class = "col-7 post-modal-image">
+              <div class = "w-100 h-100">
+                <% if post.images.any? %>
+                  <div class = "w-100 h-100">
+                      <%= render partial: "shared/carousel", locals: {images: post.images} %>
+                  </div>
+                <%end%>
+              </div>
+            </div>
 
-  <div>
-    <% if post.images.any? %>
-        <div>
-          <% post.images.each do |image| %>
-          <%= image_tag(image, width: 400) %>
-          <% end %>
+            <div class = "col h-100 border-2 position">
+              <div class = "px-4">
+                <div class="modal-header py-4" style= "padding: 0">
+                  <div class= "d-flex justify-content-between align-items-center ">
+                    <%=render partial: 'shared/avatar', locals: {user: post.user, size: 30}%>
+                    <h6 class="modal-title px-2"> <strong><%= post.user.username %></strong></h6>
+                  </div>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div>
+                  <%= link_to "Edit this post", edit_post_path(post) %>
+                </div>
+                <div>
+                  <%= turbo_stream_from @post, :comments %>
+                  <%= tag.div id: "#{dom_id(@post)}_comments",style: "overflow-y: scroll; max-height: 600px" do %>
+                    <%= render @post.comments %>
+                  <%end%>
+                </div>
+              </div>
+              <div>
+               <div class = "like-comment-container">
+                <div class = "w-100">
+                  <div class = "d-flex px-4 pb-5 pt-1 border-start border-top">
+                    <div id="like-button-<%= post.id %>">
+                      <%= render 'likes/like', likeable: post %>
+                    </div>
+                  </div>
+                  <div class="add-comment-container px-4">
+                    <span class="card-icon"><i class="bi bi-emoji-smile"></i></span>
+                    <div class="comment-container">
+                      <%= render partial: 'comments/form', locals: {parent_id: nil, post: @post, comment: Comment.new} %>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+          </div>
+
+          </div>
         </div>
-    <%end%>
+
+      </div>
+    </div>
   </div>
-</div>
-<%= link_to "Edit this post", edit_post_path(post) %>
+<%end%>

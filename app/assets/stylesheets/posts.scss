@@ -50,10 +50,31 @@
   color: white;
   font-size: 16px;
 }
-// .postform {
-//   position: absolute;
-//   z-index: 2;
-//   border-radius: 6px;
-//   background: #bad5ff;
-//   padding: 100px;
-// }
+
+.modal-dialog {
+  height: 90%; /* = 90% of the .modal-backdrop block = %90 of the screen */
+}
+.modal-content {
+  height: 100%; /* = 100% of the .modal-dialog block */
+}
+
+.post-modal-image{
+  background: black;
+}
+.post-image{
+  position: fixed;
+}
+.card-img-container{
+  width: 100%;
+  // height: 465px;
+  background: black;
+}
+.position{
+  position: relative;
+}
+
+.like-comment-container{
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}

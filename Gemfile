@@ -9,7 +9,9 @@ gem 'rails', '~> 6.0.5', '>= 6.0.5.1'
 gem 'devise'
 gem 'gravatar_image_tag'
 gem 'image_processing'
+gem 'jquery-rails'
 
+gem 'ransack'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server

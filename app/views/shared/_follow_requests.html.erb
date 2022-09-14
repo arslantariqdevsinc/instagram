@@ -1,0 +1,18 @@
+<div id="follow-request-<%=user.id%>" class="d-flex justify-content-between align-items-center py-2">
+  <%= link_to user ,class: "nav-link text-bold" do%>
+    <div class = "d-flex">
+      <%=render partial: 'shared/avatar', locals: {user: user, size: 40}%>
+      <div class = "d-flex justify-content-between align-items-center">
+        <div class = "px-2">
+          <p class="sidebar-title card-title">
+            <%= user.username %>
+          </p>
+          <p class="card-subtitle sidebar-subtitle">Requested</p>
+        </div>
+      </div>
+    </div>
+  <%end%>
+  <span class="sidebar-btn">
+    <%= render 'users/accept_follow_request', user: user%>
+  </span>
+</div>

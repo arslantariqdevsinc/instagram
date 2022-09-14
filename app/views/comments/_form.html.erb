@@ -14,13 +14,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class = "d-flex">
+    <div class="field w-100 h-100">
+      <%= form.text_field :body,placeholder: "Add a comment...", class: "border-0 w-100 h-100", required: true,  style: "width:100%; outline:none;"%>
+    </div>
+    <div class="actions">
+      <%= form.submit 'Post',class: "simple-btn", style: "color: blue; width:100%"%>
+    </div>
   </div>
 
   <%= link_to 'Cancel', comment, class: "btn btn-link" if form.object.persisted? %>

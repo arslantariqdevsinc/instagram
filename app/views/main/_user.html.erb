@@ -1,0 +1,11 @@
+<li class = "dropdown-item", id = "<%= dom_id(user)%>">
+  <%=link_to user_path(user) do%>
+    <div class = "d-flex">
+      <%= render partial: "shared/avatar", locals: {user: user, size: 50}%>
+      <div>
+        <p><%=user.username%></p>
+        <p class = "text-muted"><%=user.fullname%></p>
+      </div>
+    </div>
+  <%end%>
+</li>

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   include CommentsHelper
 
   before_action :authenticate_user!
-  before_action :set_comment, only: %i[show edit update destroy]
+  before_action :set_comment, only: %i[edit update destroy]
   before_action :set_post, only: %i[new]
 
   def new
@@ -13,23 +13,23 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
-
-
     respond_to do |format|
       if @comment.save
+        flash.now[:notice] = 'Comment created successfully.'
+
         comment = Comment.new
-        format.turbo_stream {render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, comment), partial: 'comments/form',
-          locals: { comment: comment, post: @post })
-        }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, comment), partial: 'comments/form',
+                                                                                        locals: { comment: comment, post: @post })
+        end
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
       else
-        format.turbo_stream {render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, @comment), partial: 'comments/form',
-                                                                                       locals: { comment: @comment, post: @post })
-        }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, @comment), partial: 'comments/form',
+                                                                                         locals: { comment: @comment, post: @post })
+        end
         flash.now[:notice] = @comment.errors.full_messages.to_sentence
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,16 +46,14 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-
-  end
+  def edit; end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
     @comment.destroy
     respond_to do |format|
       format.turbo_stream {}
-      format.html { redirect_to @comment.post , notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to @comment.post, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

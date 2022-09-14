@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+  <div>
+    <%= @story.body %>
+  </div>
+  <div>
+    <% if @story.video.present? %>
+      <%= video_tag url_for(@story.video), controls: true %>
+    <%else%>
+      <div>
+        <p>VIDEO IS NIL</p>
+      </div>
+    <%end%>
+  </div>
+<%= link_to 'Edit', edit_story_path(@story) %> |
+<%= link_to 'Back', stories_path %>

@@ -4,26 +4,29 @@
   <%if @user.posts.exists? %>
       <%= render partial: 'shared/grid', locals: {posts: @posts}%>
   <%else%>
-    <div>
-      <h1>Start capturing and sharing your moments.</h1>
+    <div class = "text-center">
+
+      <h6>Start capturing and sharing your moments.</h6>
     </div>
   <%end%>
 
 <% else %>
   <%= render 'other_user', user: @user%>
 
-  <%if public?(@user) %>
-    <%if @user.posts.exists?  %>
-      <%= render partial: 'shared/grid', locals: {posts: @posts}%>
+  <div class = "">
+    <%if public?(@user) %>
+      <%if @user.posts.exists?  %>
+        <%= render partial: 'shared/grid', locals: {posts: @posts}%>
+      <%else%>
+        <div class = "text-center">
+          <h6>User has no posts yet!</h6>
+        </div>
+      <%end%>
     <%else%>
-      <div>
-        <h1>User has no posts yet!</h1>
-      </div>
+        <div class = "text-center">
+          <h6>Profile is Private</h6>
+        </div>
     <%end%>
-  <%else%>
-      <div>
-        <h1>Profile is Private</h1>
-      </div>
-  <%end%>
+  </div>
 <%end%>
 

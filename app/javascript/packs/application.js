@@ -3,14 +3,16 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+require("jquery/dist/jquery")
 import "@hotwired/turbo-rails"
 Turbo.session.drive = false
 import "controllers"
 require("@rails/ujs").start()
 // require("turbolinks").start()
+require('jquery')
+
 require("@rails/activestorage").start()
 require("channels")
-
 import 'bootstrap-icons/font/bootstrap-icons.css'
 
 // Uncomment to copy all static images under ../images to the output folder and reference

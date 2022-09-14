@@ -16,6 +16,8 @@
 
  */
 
+ @import 'bootstrap';
+
  *{
   box-sizing: border-box;
  }
@@ -24,13 +26,7 @@
   background: white;
   padding: 0px;
 }
-/* #modal {
-  position: absolute;
-  z-index: 2;
-  right: 10px;
-  top: 10px;
-  width: 400px;
-  word-break: break-word;
-  border-radius: 6px;
-  background: #bad5ff;
-} */
+.simple-btn{
+  background: none;
+  border: 0;
+}
