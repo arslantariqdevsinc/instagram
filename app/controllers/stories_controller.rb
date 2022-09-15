@@ -61,6 +61,8 @@ class StoriesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_story
     @story = Story.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to stories_path
   end
 
   def set_user
