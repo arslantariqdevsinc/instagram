@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.0'
+ruby '2.6.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.5', '>= 6.0.5.1'
@@ -71,3 +71,5 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
 end
+
+gem 'pundit', '~> 2.2'

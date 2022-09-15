@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include Pundit::Authorization
   protect_from_forgery
 
   ADDED_ATTR = %i[username email password password_confirmation remember_me].freeze

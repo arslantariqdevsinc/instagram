@@ -18,10 +18,10 @@
             <% updated_at = comment.updated_at%>
             <%= updated_at.strftime("%B #{updated_at.day.ordinalize}, %Y") %>
           </p>
-          <p class = "comment-links">
-            <%= link_to 'Edit', edit_comment_path(comment), data:{turbo: true}%>
-            <%= link_to 'Delete', comment_path(comment), method: :delete, remote: true,data: {confirm: "Are you sure?"} ,class: "mr-2"%>
-          </p>
+            <p class = "comment-links">
+              <%= link_to 'Edit', edit_comment_path(comment), data:{turbo: true}%>
+              <%= link_to 'Delete', comment_path(comment), method: :delete, remote: true,data: {confirm: "Are you sure?"} ,class: "mr-2"%>
+            </p>
         </div>
       </div>
 

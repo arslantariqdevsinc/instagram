@@ -37,6 +37,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize @comment
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
@@ -48,7 +49,8 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+  end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
@@ -64,7 +66,13 @@ class CommentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
-    @comment = current_user.comments.find(params[:id])
+
+    begin
+      @comment = current_user.comments.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      flash.now[:notice] = "You cannot perform this action"
+      redirect_to current_user
+    end
   end
 
   # Only allow a list of trusted parameters through.
