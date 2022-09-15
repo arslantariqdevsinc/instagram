@@ -37,8 +37,10 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(username: params[:id])
-    redirect_to user_session_path if @user.nil?
+    if params.key?(:id)
+      @user = User.find_by(username: params[:id])
+      redirect_to user_session_path if @user.nil?
+    end
   end
 
   def this_user?
