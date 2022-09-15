@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ImagePreviewController from "./image_preview_controller"
+application.register("image-preview", ImagePreviewController)
+
 import PostViewController from "./post_view_controller"
 application.register("post-view", PostViewController)
 

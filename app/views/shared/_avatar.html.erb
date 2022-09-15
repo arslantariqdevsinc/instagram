@@ -1,3 +1,11 @@
+
+<% if local_assigns.key?(:border) %>
+  <% style = local_assigns[:border]%>
+ <div class = "">
+    <%= image_tag user_avatar(user, size), class: "rounded-circle #{style}" %>
+  </div>
+<%else%>
   <div class = "">
     <%= image_tag user_avatar(user, size), class: "rounded-circle" %>
   </div>
+<%end%>
