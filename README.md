@@ -1,24 +1,34 @@
-# README
+### Instagram Clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prerequisites:
+1. Ruby version >= 2.5.0
+2. Rails version = 6.1
+3. Yarn
 
-Things you may want to cover:
+Please run the following commands to get your local environment setup:
 
-* Ruby version
+- yarn install
+- bundle install
+### Visit following URL
+- visit localhost:3000
 
-* System dependencies
+## Contributing
 
-* Configuration
+1. Clone the project
+```
+https://github.com/arslantariqdevsinc/instagram.git
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2. Create your feature branch
+```
+git checkout -b my-feature
+```
+3. Commit your changes
+```
+git commit -am 'My feature'
+```
+4. Push to the branch
+```
+git push -u origin my-feature
+```
+5. Create new Pull Request
