@@ -19,14 +19,16 @@ class CommentsController < ApplicationController
 
         comment = Comment.new
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, comment), partial: 'comments/form',
-                                                                                        locals: { comment: comment, post: @post })
+          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, comment),
+                                                    partial: 'comments/form',
+                                                    locals: { comment: comment, post: @post })
         end
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
         format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, @comment), partial: 'comments/form',
-                                                                                         locals: { comment: @comment, post: @post })
+          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, @comment),
+                                                    partial: 'comments/form',
+                                                    locals: { comment: @comment, post: @post })
         end
         flash.now[:notice] = @comment.errors.full_messages.to_sentence
         format.html { render :new, status: :unprocessable_entity }
