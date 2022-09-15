@@ -4,5 +4,5 @@
       <i class="bi bi-plus-circle"></i>
     <%end%>
   </div>
-  <%= render partial: "shared/story", collection: users, as: :user%>
+  <%= render partial: "shared/story", collection: User.with_story, as: :user%>
 </div>

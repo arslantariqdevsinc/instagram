@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
   end
 
   def create
+    authorize @comment
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
     respond_to do |format|
@@ -37,7 +38,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-    authorize @comment
+     authorize @comment
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
@@ -50,10 +51,13 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    authorize @comment
   end
 
   # DELETE /comments/1 or /comments/1.json
   def destroy
+    authorize @comment
+
     @comment.destroy
     respond_to do |format|
       format.turbo_stream {}
@@ -66,13 +70,9 @@ class CommentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
-
-    begin
-      @comment = current_user.comments.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      flash.now[:notice] = "You cannot perform this action"
-      redirect_to current_user
-    end
+    @comment = Comment.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:notice] = 'You cannot perform this action'
   end
 
   # Only allow a list of trusted parameters through.

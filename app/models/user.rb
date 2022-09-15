@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   attr_writer :login
 
+  scope :with_story, -> { where('EXISTS(SELECT 1 FROM stories WHERE user_id = users.id)') }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -87,6 +88,6 @@ class User < ApplicationRecord
   def generate_feed
     # @feed_posts = Post.where(user_id: following_ids)  #{Slow}
     following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
-    Post.where("user_id IN (#{following_ids})", user_id: id)
+    Post.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 end

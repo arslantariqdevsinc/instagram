@@ -25,10 +25,8 @@ class StoriesController < ApplicationController
     respond_to do |format|
       if @story.save
         format.html { redirect_to story_url(@story), notice: 'Story was successfully created.' }
-        format.json { render :show, status: :created, location: @story }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
       end
     end
   end
