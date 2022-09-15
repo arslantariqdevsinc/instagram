@@ -8,11 +8,11 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.present? && user == comment.user
+    owner?
   end
 
   def destroy?
-    return true if user.present? && user == comment.user
+    owner?
   end
 
   private
