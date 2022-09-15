@@ -10,6 +10,7 @@ gem 'devise'
 gem 'gravatar_image_tag'
 gem 'image_processing'
 gem 'jquery-rails'
+gem 'uglifier'
 
 gem 'ransack'
 # Use postgresql as the database for Active Record
