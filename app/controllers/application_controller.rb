@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  ADDED_ATTR = %i[username email password password_confirmation remember_me]
+  ADDED_ATTR = %i[username email password password_confirmation remember_me].freeze
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
