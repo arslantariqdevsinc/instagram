@@ -15,6 +15,7 @@
  *= stub devise.css
 
  */
+ @import "bootstrap/scss/bootstrap.scss";
 
  *{
   box-sizing: border-box;
