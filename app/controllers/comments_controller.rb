@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
   end
 
   def create
-    authorize @comment
     @post = Post.find(params[:post_id])
     @comment = current_user.comments.new(comment_params)
     respond_to do |format|
@@ -38,7 +37,7 @@ class CommentsController < ApplicationController
   end
 
   def update
-     authorize @comment
+    authorize @comment
     respond_to do |format|
       if @comment.update(comment_params)
         format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
