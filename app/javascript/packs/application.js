@@ -9,7 +9,6 @@ Turbo.session.drive = false
 import "controllers"
 require("@rails/ujs").start()
 // require("turbolinks").start()
-require('jquery')
 
 require("@rails/activestorage").start()
 require("channels")
