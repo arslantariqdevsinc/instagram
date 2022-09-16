@@ -13,25 +13,21 @@ Rails.application.routes.draw do
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :comments
+  resources :comments, only: %i[edit destroy]
 
   resources :posts do
     resources :comments
   end
-
-  resources :comments do
-    resources :comments
-  end
+  resources :stories, except: [:index]
 
   resources :users, only: %i[index show] do
     member do
       get :following, :followers
+      get :stories
     end
   end
 
   resources :relationships, only: %i[create destroy update]
 
   get :search, to: 'main#search'
-
-  resources :stories
 end

@@ -2,7 +2,7 @@
 
   <div class = "main-gallery-wrapper col-7 px-3">
 
-    <%= render partial: "shared/stories", locals: {users: User.all} %>
+    <%= render partial: "shared/stories_list", locals: {users: @users_with_stories} %>
 
     <%= render partial: 'shared/post', collection: @feed_posts, as: :post%>
 

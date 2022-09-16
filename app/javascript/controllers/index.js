@@ -13,5 +13,8 @@ application.register("post-view", PostViewController)
 import SearchFormController from "./search_form_controller"
 application.register("search-form", SearchFormController)
 
+import StoryViewController from "./story_view_controller"
+application.register("story-view", StoryViewController)
+
 import TurboModalController from "./turbo_modal_controller"
 application.register("turbo-modal", TurboModalController)

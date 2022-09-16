@@ -27,11 +27,16 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def stories
+    @stories = @user.stories.all
+  end
+
   def feed
     @user = current_user
-    @feed_posts = @user.generate_feed
+    @feed_posts = @user.generate_posts
     @feed_posts = Array(@feed_posts)
     @suggestions = @user.suggestions
+    @users_with_stories = @user.generate_stories
   end
 
   private

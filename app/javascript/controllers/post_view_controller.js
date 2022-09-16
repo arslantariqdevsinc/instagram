@@ -10,8 +10,6 @@ export default class extends Controller {
     // var myModal = document.getElementById("myModal");
     // var modal = new bootstrap.Modal(myModal);
     // modal.show();
-    console.log("ASdsadsad")
-
   }
   disconnect(){
       this.modal.hide();

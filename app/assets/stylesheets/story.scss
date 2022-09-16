@@ -1,0 +1,17 @@
+.story{
+  color: white;
+  text-align: center;
+  position: relative;
+}
+.story-inner{
+  background: rgb(36, 36, 36);
+
+}
+.story-body{
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: medium;
+
+}
