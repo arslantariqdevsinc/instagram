@@ -33,7 +33,9 @@ class StoriesController < ApplicationController
   def destroy
     @story.destroy
     respond_to do |format|
-      format.html { redirect_back fallback_location: authenticated_root_path, notice: 'Story was successfully destroyed.' }
+      format.html do
+        redirect_back fallback_location: authenticated_root_path, notice: 'Story was successfully destroyed.'
+      end
     end
   end
 

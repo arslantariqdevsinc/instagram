@@ -71,3 +71,5 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
 end
+
+gem 'sidekiq', '~> 6.5'
