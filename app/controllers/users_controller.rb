@@ -7,7 +7,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    #  @user = User.find_by(username: params[:id])
     if this_user?
       @posts = @user.posts.all
     elsif !@user.is_private?

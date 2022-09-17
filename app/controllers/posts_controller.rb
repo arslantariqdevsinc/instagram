@@ -17,9 +17,11 @@ class PostsController < ApplicationController
 
   def create
     @post = @user.posts.new(post_params)
+    flash[:now] = 'Post was successfully created.'
 
     respond_to do |format|
       if @post.save
+        format.turbo_stream
         format.html { redirect_to posts_path, notice: 'Post has been saved successfully.' }
       else
         # FIX THIS, INSTEAD OF GOING TO HTML AND RENDERING THE MODAL AGAIN. MAKE IT A TURBO_STREAM RESPONSE LIKE COMMENTS
@@ -28,7 +30,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1 or /posts/1.json
   def update
     respond_to do |format|
       if @post.update(post_params)
@@ -39,7 +40,6 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1 or /posts/1.json
   def destroy
     @post.destroy
 
@@ -52,7 +52,6 @@ class PostsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   rescue ActiveRecord::RecordNotFound
@@ -64,7 +63,6 @@ class PostsController < ApplicationController
     @user = current_user
   end
 
-  # Only allow a list of trusted parameters through.
   def post_params
     params.require(:post).permit(:body, images: [])
   end

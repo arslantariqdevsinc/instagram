@@ -11,6 +11,6 @@ class Story < ApplicationRecord
   end
 
   after_create_commit lambda {
-    StoriesCleanupJob.set(wait: 1.minute).perform_later(id)
+    StoriesCleanupJob.set(wait: 24.hours).perform_later(id)
   }
 end

@@ -19,10 +19,10 @@
   <body>
     <%= render 'shared/navbar' %>
     <div class = "container">
-      <%= render 'shared/flash'%>
       <%= turbo_frame_tag "modal"%>
       <%= turbo_frame_tag "detail" %>
       <%= turbo_frame_tag "story_detail" %>
+      <%= render 'shared/flash'%>
       <%= yield %>
     </div>
   </body>
