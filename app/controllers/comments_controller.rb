@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         flash.now[:notice] = 'Comment created successfully.'
-
         comment = Comment.new
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, comment),

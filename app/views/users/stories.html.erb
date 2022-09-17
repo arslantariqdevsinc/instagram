@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "story_detail" do%>
+<%= turbo_frame_tag "story_detail"  do%>
   <%= tag.div data: { controller: "story-view"}, class: "" do %>
     <div class="modal fade" id="story-detail-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-fullscreen">
@@ -10,6 +10,7 @@
           <div class="modal-body">
             <div id="carouselExampleControls" class="carousel slide w-50 h-100 d-flex justify-content-center align-items-center" data-bs-ride="true">
               <div class="carousel-inner  rounded-4 h-100">
+                <%if @stories.any?%>
                   <div class="carousel-item active w-100 h-100">
                     <%=render partial: 'stories/story', locals: {story: @stories.first} %>
                   </div>
@@ -18,6 +19,11 @@
                       <%=render partial: 'stories/story', locals: {story: story} %>
                     </div>
                   <%end%>
+                <%else%>
+                 <div class="carousel-item active w-100 h-100">
+                    <div class =  "h-100 w-100 text-center"><h6 style= "color: white">This story isnt available anymore</h6></div>
+                  </div>
+                <%end%>
                 </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

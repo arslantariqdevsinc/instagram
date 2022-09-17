@@ -92,6 +92,9 @@ class User < ApplicationRecord
   end
 
   def generate_stories
-    following.with_story
+    users_with_stories = following.with_story
+    users_with_stories = Array(users_with_stories)
+    stories.any? ? users_with_stories << self : users_with_stories
+
   end
 end
