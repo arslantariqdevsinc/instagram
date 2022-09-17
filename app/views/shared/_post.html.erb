@@ -35,7 +35,6 @@
     </span>
 
     <div class = "w-100">
-      <%= turbo_stream_from post, :comments %>
       <%= tag.div id: "#{dom_id(post)}_comments" ,style: "overflow-y: scroll; height:100px" do %>
         <%= render post.comments %>
       <%end%>
@@ -47,7 +46,5 @@
         <%= render partial: 'comments/form', locals: {parent_id: nil, post: post, comment: Comment.new} %>
       </div>
     </div>
-
   </div>
-
 </div>

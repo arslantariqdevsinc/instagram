@@ -27,7 +27,6 @@
                   <%= link_to "Delete this post", post_path(post), method: :delete, data:{confirm: "Are you sure?"} %>
                 </div>
                 <div>
-                  <%= turbo_stream_from @post, :comments %>
                   <%= tag.div id: "#{dom_id(@post)}_comments",style: "overflow-y: scroll; max-height: 600px" do %>
                     <%= render @post.comments %>
                   <%end%>

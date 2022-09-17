@@ -1,4 +1,3 @@
-<%= turbo_stream_from comment%>
 <%= turbo_frame_tag comment do%>
   <div class = "comment py-3 w-100">
     <div class= "d-flex justify-content-start comment-inner">
@@ -20,12 +19,10 @@
           </p>
           <p class = "comment-links">
             <%= link_to 'Edit', edit_comment_path(comment), data:{turbo: true}%>
-            <%= link_to 'Delete', comment_path(comment), method: :delete, remote: true,data: {confirm: "Are you sure?"} ,class: "mr-2"%>
+            <%= link_to 'Delete', comment_path(comment), data: {turbo: true, turbo_method: :delete, turbo_confirm: "Are you sure?"} ,class: "mr-2"%>
           </p>
         </div>
       </div>
-
-
     </div>
   </div>
 <%end%>

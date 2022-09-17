@@ -44,7 +44,9 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_back fallback_location: authenticated_root_path, notice: 'Post was successfully destroyed.' }
+      format.html do
+        redirect_back fallback_location: authenticated_root_path, notice: 'Post was successfully destroyed.'
+      end
     end
   end
 
