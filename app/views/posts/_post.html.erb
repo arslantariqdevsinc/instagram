@@ -24,6 +24,7 @@
                 </div>
                 <div>
                   <%= link_to "Edit this post", edit_post_path(post) %>
+                  <%= link_to "Delete this post", post_path(post), method: :delete, data:{confirm: "Are you sure?"} %>
                 </div>
                 <div>
                   <%= turbo_stream_from @post, :comments %>
