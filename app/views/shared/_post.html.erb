@@ -1,4 +1,4 @@
-<div class="card-wrapper flex-container mb-4">
+<div id = "posts-feed-<%= post.id %>" class="card-wrapper flex-container mb-4">
   <div class="card-header grid">
     <div class="header-img-container flex-container">
           <%=render partial: 'shared/avatar', locals: {user: post.user, size: 40}%>
@@ -21,14 +21,21 @@
       </div>
     </span>
     <span class="card-icon card-icon-left pb-4">
+      <%= link_to post, data:{turbo: true, turbo_frame: "detail"} do%>
         <i class="bi bi-chat"></i>
+      <%end%>
     </span>
-      <span class="card-icon card-icon-left pb-4">
-        <i class="bi bi-send"></i>
+
+    <span class="card-icon card-icon-right pb-4">
+      <%= link_to post_path(post), method: :delete, data:{turbo: true, confirm: "Are you sure you want to delete this post?"} do %>
+        <i class="bi bi-trash3"></i>
+      <%end%>
     </span>
-    <span class="card-icon card-icon-right pb-4"><i class="bi bi-bookmark"></i></span>
     </div>
     <span class="card-text"><span class="bold title-margin"><%= post.user.username %></span><%=post.body%></span>
+    <div class="card-time text-muted">
+     <%= date(post) %>
+    </div>
 
     <span class="card-text comments-btn">
       <%= link_to "See more comments",post, data:{turbo: true, turbo_frame: "detail"} %>
@@ -39,7 +46,6 @@
         <%= render post.comments %>
       <%end%>
     </div>
-    <span class="card-time"></span>
     <div class="add-comment-container flex-container">
       <span class="card-icon"><i class="bi bi-emoji-smile"></i></span>
       <div class="comment-container">

@@ -7,9 +7,6 @@
       <p class = "text-sm">
         <%= pluralize(likeable.likes.count , "like") %>
       <p>
-      <p class = "text-sm text-muted">
-        <%= like_date(likeable)%>
-      </p>
     </div>
   <% end%>
   <% else %>
@@ -18,7 +15,6 @@
       <span class = "heart-icon"><i style = "color: red;" class="bi bi-heart-fill"></i></span>
       <p class = "text-sm">
       <%= pluralize(likeable.likes.count , "like") %>
-      <p>
     </div>
     <%end%>
   <% end %>

@@ -33,6 +33,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        format.turbo_stream
         format.html { redirect_to post_url(@post), notice: 'Post was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -44,9 +45,8 @@ class PostsController < ApplicationController
     @post.destroy
 
     respond_to do |format|
-      format.html do
-        redirect_back fallback_location: authenticated_root_path, notice: 'Post was successfully destroyed.'
-      end
+      format.turbo_stream
+      format.html {redirect_back fallback_location: authenticated_root_path, notice: 'Post was successfully destroyed.'}
     end
   end
 

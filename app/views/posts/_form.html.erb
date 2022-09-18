@@ -30,7 +30,7 @@
     <%= form.file_field :images, id: "files", multiple: true, class:"form-control", required: true, data: {image_preview_target: "input", action: "input->image-preview#readURL" }%>
 
     <div class="field">
-      <%= form.text_field :body ,data: {action: "input->image-preview#Test" },class: "form-control", placeholder: "Write something"%>
+      <%= form.text_field :body ,data: {action: "input->image-preview#Test" },class: "form-control", placeholder: "Write something", required: true%>
     </div>
 
     <div class="actions">
