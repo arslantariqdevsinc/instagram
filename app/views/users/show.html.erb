@@ -14,7 +14,7 @@
   <%= render 'other_user', user: @user%>
 
   <div class = "">
-    <%if public?(@user) %>
+    <%if @allowed %>
       <%if @user.posts.exists?  %>
         <%= render partial: 'shared/grid', locals: {posts: @posts}%>
       <%else%>

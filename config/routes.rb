@@ -3,9 +3,8 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
 
   devise_for :users, path: 'accounts'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :likes
+  resources :likes, only: %i[create destroy]
 
   devise_scope :user do
     authenticated :user do
@@ -15,7 +14,6 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :comments, only: %i[edit destroy]
 
   resources :posts do
@@ -29,7 +27,6 @@ Rails.application.routes.draw do
       get :stories
     end
   end
-
   resources :relationships, only: %i[create destroy update]
 
   get :search, to: 'main#search'

@@ -9,6 +9,6 @@ module ApplicationHelper
   end
 
   def date(record)
-    record.created_at.strftime("%B %d, %Y")
+    record.created_at.strftime('%B %d, %Y')
   end
 end

@@ -18,8 +18,7 @@
             <%= updated_at.strftime("%B #{updated_at.day.ordinalize}, %Y") %>
           </p>
           <p class = "comment-links">
-            <%= link_to 'Edit', edit_comment_path(comment), data:{turbo: true}%>
-            <%= link_to 'Delete', comment_path(comment), data: {turbo: true, turbo_method: :delete, turbo_confirm: "Are you sure?"} ,class: "mr-2"%>
+            <%= render partial: "comments/conditional_edit_delete", locals: {comment: comment}%>
           </p>
         </div>
       </div>

@@ -16,7 +16,6 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         @new_comment = Comment.new
-        flash.now[:notice] = 'Comment created successfully.'
         format.turbo_stream
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
@@ -32,6 +31,7 @@ class CommentsController < ApplicationController
   end
 
   def update
+    authorize @comment
     respond_to do |format|
       if @comment.update(comment_params)
         format.turbo_stream
@@ -42,9 +42,12 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @comment
+  end
 
   def destroy
+    authorize @comment
     @comment.destroy
     respond_to do |format|
       format.turbo_stream

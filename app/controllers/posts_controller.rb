@@ -13,12 +13,13 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def edit; end
+  def edit
+    authorize @post
+  end
 
   def create
     @post = @user.posts.new(post_params)
-    flash[:now] = 'Post was successfully created.'
-
+    authorize @post
     respond_to do |format|
       if @post.save
         format.turbo_stream
@@ -31,6 +32,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize @post
     respond_to do |format|
       if @post.update(post_params)
         format.turbo_stream
@@ -42,11 +44,13 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post
     @post.destroy
-
     respond_to do |format|
       format.turbo_stream
-      format.html {redirect_back fallback_location: authenticated_root_path, notice: 'Post was successfully destroyed.'}
+      format.html do
+        redirect_back fallback_location: authenticated_root_path, notice: 'Post was successfully destroyed.'
+      end
     end
   end
 

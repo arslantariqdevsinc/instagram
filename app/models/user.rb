@@ -44,6 +44,14 @@ class User < ApplicationRecord
     @login || username || email
   end
 
+  def private?
+    is_private?
+  end
+
+  def public?
+    !is_private?
+  end
+
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))

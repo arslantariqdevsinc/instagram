@@ -8,7 +8,6 @@ class StoriesController < ApplicationController
 
   def create
     @story = @user.stories.new(story_params)
-
     respond_to do |format|
       if @story.save
         format.html { redirect_to story_url(@story), notice: 'Story was successfully created.' }
@@ -19,6 +18,7 @@ class StoriesController < ApplicationController
   end
 
   def destroy
+    authorize @story
     @story.destroy
     respond_to do |format|
       format.html do

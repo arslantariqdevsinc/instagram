@@ -7,11 +7,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    if this_user?
-      @posts = @user.posts.all
-    elsif !@user.is_private?
-      @posts = @user.posts.all
+    if current_user
+      @allowed = this_user? || @user.public? || @user.private? && current_user.following?(@user)
+    else
+      @allowed = @user.public?
     end
+    @posts = @user.posts.all if @allowed
   end
 
   def following

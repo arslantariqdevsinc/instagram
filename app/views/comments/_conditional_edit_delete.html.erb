@@ -1,0 +1,6 @@
+<%if policy(comment).edit? %>
+  <%= link_to 'Edit', edit_comment_path(comment), data:{turbo: true}%>
+<%end%>
+<%if policy(comment).destroy?%>
+ <%= link_to 'Delete', comment_path(comment), data: {turbo: true, turbo_method: :delete, turbo_confirm: "Are you sure?"} ,class: "mr-2"%>
+<%end%>
