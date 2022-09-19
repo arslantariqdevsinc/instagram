@@ -15,8 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :comments, only: %i[edit destroy]
+
   resources :posts do
-    resources :comments, shallow: true
+    resources :comments, except: %i[edit destroy]
   end
   resources :stories, except: [:index]
 
