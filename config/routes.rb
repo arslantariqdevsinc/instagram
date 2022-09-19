@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   devise_for :users, path: 'accounts'
 
   resources :likes, only: %i[create destroy]
@@ -11,10 +14,9 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-  resources :comments, only: %i[edit destroy]
 
   resources :posts do
-    resources :comments
+    resources :comments, shallow: true
   end
   resources :stories, except: [:index]
 

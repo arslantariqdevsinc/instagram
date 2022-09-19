@@ -14,10 +14,4 @@ class PostPolicy < ApplicationPolicy
   def destroy?
     owner?
   end
-
-  private
-
-  def post
-    record
-  end
 end

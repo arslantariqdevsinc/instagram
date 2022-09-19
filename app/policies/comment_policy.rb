@@ -10,10 +10,4 @@ class CommentPolicy < ApplicationPolicy
   def destroy?
     owner?
   end
-
-  private
-
-  def comment
-    record
-  end
 end
