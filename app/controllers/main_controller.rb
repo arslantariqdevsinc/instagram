@@ -11,10 +11,6 @@ class MainController < ApplicationController
 
   private
 
-  def force_json
-    request.format = :json
-  end
-
   def turbo_frame_request_variant
     request.variant = :turbo_frame if turbo_frame_request?
   end

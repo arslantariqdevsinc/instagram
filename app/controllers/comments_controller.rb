@@ -15,13 +15,8 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     respond_to do |format|
       if @comment.save
-        flash.now[:notice] = 'Comment created successfully.'
-        comment = Comment.new
-        format.turbo_stream do
-          render turbo_stream: turbo_stream.replace(dom_id_for_records(@post, comment),
-                                                    partial: 'comments/form',
-                                                    locals: { comment: comment, post: @post })
-        end
+        @new_comment = Comment.new
+        format.turbo_stream
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
         format.turbo_stream do
@@ -29,44 +24,45 @@ class CommentsController < ApplicationController
                                                     partial: 'comments/form',
                                                     locals: { comment: @comment, post: @post })
         end
-        flash.now[:notice] = @comment.errors.full_messages.to_sentence
         format.html { render :new, status: :unprocessable_entity }
       end
     end
   end
 
   def update
+    authorize @comment
     respond_to do |format|
       if @comment.update(comment_params)
+        format.turbo_stream
         format.html { redirect_to comment_url(@comment), notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def edit; end
+  def edit
+    authorize @comment
+  end
 
-  # DELETE /comments/1 or /comments/1.json
   def destroy
+    authorize @comment
     @comment.destroy
     respond_to do |format|
-      format.turbo_stream {}
+      format.turbo_stream
       format.html { redirect_to @comment.post, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = current_user.comments.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = 'Comment not found.'
+    redirect_back fallback_location: authenticated_root_path
   end
 
-  # Only allow a list of trusted parameters through.
   def comment_params
     params.require(:comment).permit(:body, :parent_id).merge(post_id: params[:post_id])
   end
@@ -77,5 +73,8 @@ class CommentsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:post_id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = 'Post not found.'
+    redirect_back fallback_location: authenticated_root_path
   end
 end

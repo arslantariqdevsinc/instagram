@@ -1,4 +1,4 @@
-<%= form_with(model: post, data: {turbo: "true"}, class:"w-100 h-100") do |form| %>
+<%= form_with(model: post, data: {turbo: true}, class:"w-100 h-100") do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -30,7 +30,7 @@
     <%= form.file_field :images, id: "files", multiple: true, class:"form-control", required: true, data: {image_preview_target: "input", action: "input->image-preview#readURL" }%>
 
     <div class="field">
-      <%= form.text_field :body ,data: {action: "input->image-preview#Test" },class: "form-control", placeholder: "Write something"%>
+      <%= form.text_field :body ,data: {action: "input->image-preview#Test" },class: "form-control", placeholder: "Write something", required: true%>
     </div>
 
     <div class="actions">

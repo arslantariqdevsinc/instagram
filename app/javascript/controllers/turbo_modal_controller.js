@@ -25,19 +25,14 @@ export default class extends Controller {
   submitEnd(e) {
     if (e.detail.success) {
 
-      // console.log("SJADHASIDBSAUIPDSAIDNSADISNAUIDSAIUDBSAPUIDHSAIPODJSAUIDSAOIDJSADHASIODJHBASPYIDVBAPUI")
-      // var myModal = document.getElementById("myModal");
-      // var modal = bootstrap.Modal.getInstance(myModal)
-      // modal.hide();
-      // document.body.classList.remove("modal-open");
-      // document.getElementsByClassName("modal-backdrop")[0].remove();
+      var myModal = document.getElementById("myModal");
+      var modal = bootstrap.Modal.getInstance(myModal)
+      modal.hide();
+      document.body.classList.remove("modal-open");
+      document.getElementsByClassName("modal-backdrop")[0].remove();
+      this.modal.hide();
 
 
-
-
-
-      // uncomment this later
-      // this.modal.hide();
 
     }
 

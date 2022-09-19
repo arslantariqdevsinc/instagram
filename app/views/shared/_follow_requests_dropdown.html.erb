@@ -1,9 +1,15 @@
+<%follow_request_count = user.follow_requests.count%>
 <div class="dropdown">
-  <button class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <button class="position-relative border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" style = "background: none">
     <h4><i class="bi bi-suit-heart"></i></h4>
+    <% if follow_request_count > 0%>
+      <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+        <%= follow_request_count %>
+      </span>
+    <%end%>
   </button>
-  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start">
-    <li><a class="dropdown-item" href="#">Follow requests</a></li>
+  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" style = "width: max-content">
+      <li><h6 class="dropdown-header">Follow Requests</h6></li>
     <li>
       <%= render partial: "shared/follow_requests", collection: user.follow_requests, as: :user%>
     </li>

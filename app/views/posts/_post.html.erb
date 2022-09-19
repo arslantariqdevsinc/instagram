@@ -1,4 +1,4 @@
-<%= tag.div data: { controller: "post-view" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
+<%= tag.div id:"post_detail#{@post.id}", data: { controller: "post-view" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
   <div class="modal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content rounded-0">
@@ -23,12 +23,8 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div>
-                  <%= link_to "Edit this post", edit_post_path(post) %>
-                  <%= link_to "Delete this post", post_path(post), method: :delete, data:{confirm: "Are you sure?"} %>
-                </div>
-                <div>
-                  <%= turbo_stream_from @post, :comments %>
                   <%= tag.div id: "#{dom_id(@post)}_comments",style: "overflow-y: scroll; max-height: 600px" do %>
+                    <%= post.body %>
                     <%= render @post.comments %>
                   <%end%>
                 </div>
@@ -36,10 +32,11 @@
               <div>
                <div class = "like-comment-container">
                 <div class = "w-100">
-                  <div class = "d-flex px-4 pb-5 pt-1 border-start border-top">
+                  <div class = "d-flex px-4 pb-5 pt-1 border-start border-top justify-content-between">
                     <div id="like-button-<%= post.id %>">
                       <%= render 'likes/like', likeable: post %>
                     </div>
+                  <%= render partial: 'posts/conditional_edit_delete', locals: {post: post}%>
                   </div>
                   <div class="add-comment-container px-4">
                     <span class="card-icon"><i class="bi bi-emoji-smile"></i></span>

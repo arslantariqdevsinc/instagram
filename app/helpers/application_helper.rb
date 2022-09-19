@@ -7,4 +7,8 @@ module ApplicationHelper
       gravatar_image_url('spam@spam.com'.gsub('spam', 'mdeering'), size: size)
     end
   end
+
+  def date(record)
+    record.created_at.strftime('%B %d, %Y')
+  end
 end

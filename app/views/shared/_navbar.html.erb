@@ -11,55 +11,7 @@
       <div class="d-flex justify-content-center" style= "width:80%">
           <%= render "main/search", class: "d-flex form-inline" %>
       </div>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item d-flex align-items-center">
-          <%# <a class="nav-link active" aria-current="page" href="#">Home</a> %>
-          <%= link_to unauthenticated_root_path, class: "nav-link active" do %>
-              <h4><i class="bi bi-house-door"></i></h4>
-          <%end%>
-
-        </li>
-        <li class="nav-item d-flex align-items-center">
-          <%= link_to unauthenticated_root_path , class: "nav-link disabled" do%>
-             <h4><i class="bi bi-send"></i></h4>
-          <%end%>
-        </li>
-        <li class="nav-item d-flex align-items-center">
-          <%= link_to new_post_path ,data: { turbo: 'true', turbo_frame: 'modal'}, class: "nav-link active" do%>
-            <h4><i class="bi bi-plus-square"></i></h4>
-          <%end%>
-        </li>
-        <li class="nav-item d-flex align-items-center">
-          <%= link_to  posts_path  , class: "nav-link active" do%>
-            <h4><i class="bi bi-compass"></i></h4>
-          <%end%>
-        </li>
-        <li class="nav-item d-flex align-items-center">
-            <%= render "shared/follow_requests_dropdown", user: current_user%>
-        </li>
-           <li class="nav-item dropdown">
-              <a class="nav-link active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <h4><i class="bi bi-person-circle"></i></h4>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="navbarDropdown">
-                <li>
-                  <%= link_to  user_path(current_user)  , class: "dropdown-item" do%>
-                    <h6><i class="bi bi-person-circle"><span class= "px-2 "> Profile</span></i></h6>
-                  <%end%>
-                </li>
-                <li>
-                  <%= link_to edit_user_registration_path , class: "dropdown-item" do%>
-                    <h6><i class="bi bi-person-circle"><span class= "px-2 "> Settings</span></i></h6>
-                  <%end%>
-                </li>
-                <li><hr class="dropdown-divider"></li>
-                <li>
-                  <%= link_to 'Log Out',destroy_user_session_path , method: :delete, class:"dropdown-item"%>
-                </li>
-              </ul>
-          </li>
-        </li>
-      </ul>
+      <%= render partial: "shared/navbar_partial"%>
     </div>
   </div>
 </nav>

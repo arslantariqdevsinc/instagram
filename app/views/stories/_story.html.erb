@@ -1,7 +1,7 @@
 <div class = "story w-100 h-100 d-flex justify-content-center align-items-center">
   <div class = "story-inner h-100 d-flex align-items-center">
     <div>
-      <%if story.user  == current_user %>
+      <%if policy(story).destroy? %>
         <%= link_to 'Delete Story',story_path(story), method: :delete%>
       <%end%>
       <% if story.attachment.present? %>

@@ -10,15 +10,17 @@ class Comment < ApplicationRecord
 
   validates :body, presence: true
 
-  after_create_commit lambda {
-    broadcast_append_to [post, :comments], target: "#{dom_id(post)}_comments"
-  }
+  # after_create_commit lambda {
+  #   broadcast_append_to [post, :comments], target: "#{dom_id(post)}_comments"
+  # }
 
-  after_destroy_commit do
-    broadcast_remove_to self
-  end
+  # after_destroy_commit do
+  #   broadcast_remove_to self
+  # end
 
-  after_update_commit do
-    broadcast_replace_to self
-  end
+  # after_update_commit do
+  #   broadcast_replace_to self
+  # end
+
+  # { Removed broadcasting for production reasons. Broadcasting is working on master branch }
 end

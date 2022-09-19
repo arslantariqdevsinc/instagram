@@ -7,12 +7,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    #  @user = User.find_by(username: params[:id])
-    if this_user?
-      @posts = @user.posts.all
-    elsif !@user.is_private?
-      @posts = @user.posts.all
-    end
+    @allowed = if current_user
+                 this_user? || @user.public? || @user.private? && current_user.following?(@user)
+               else
+                 @user.public?
+               end
+    @posts = @user.posts.all if @allowed
   end
 
   def following
@@ -42,10 +42,10 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    if params.key?(:id)
-      @user = User.find_by(username: params[:id])
-      redirect_to user_session_path if @user.nil?
-    end
+    return unless params.key?(:id)
+
+    @user = User.find_by(username: params[:id])
+    redirect_to user_session_path if @user.nil?
   end
 
   def this_user?

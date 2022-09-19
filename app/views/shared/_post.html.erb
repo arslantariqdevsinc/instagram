@@ -1,4 +1,4 @@
-<div class="card-wrapper flex-container mb-4">
+<div id = "posts-feed-<%= post.id %>" class="card-wrapper flex-container mb-4">
   <div class="card-header grid">
     <div class="header-img-container flex-container">
           <%=render partial: 'shared/avatar', locals: {user: post.user, size: 40}%>
@@ -21,33 +21,34 @@
       </div>
     </span>
     <span class="card-icon card-icon-left pb-4">
+      <%= link_to post, data:{turbo: true, turbo_frame: "detail"} do%>
         <i class="bi bi-chat"></i>
+      <%end%>
     </span>
-      <span class="card-icon card-icon-left pb-4">
-        <i class="bi bi-send"></i>
+
+    <span class="card-icon card-icon-right pb-4 d-flex justify-content-end">
+        <%= render partial: 'posts/conditional_edit_delete', locals: {post: post}%>
     </span>
-    <span class="card-icon card-icon-right pb-4"><i class="bi bi-bookmark"></i></span>
     </div>
     <span class="card-text"><span class="bold title-margin"><%= post.user.username %></span><%=post.body%></span>
+    <div class="card-time text-muted">
+     <%= date(post) %>
+    </div>
 
     <span class="card-text comments-btn">
       <%= link_to "See more comments",post, data:{turbo: true, turbo_frame: "detail"} %>
     </span>
 
     <div class = "w-100">
-      <%= turbo_stream_from post, :comments %>
       <%= tag.div id: "#{dom_id(post)}_comments" ,style: "overflow-y: scroll; height:100px" do %>
         <%= render post.comments %>
       <%end%>
     </div>
-    <span class="card-time"></span>
     <div class="add-comment-container flex-container">
       <span class="card-icon"><i class="bi bi-emoji-smile"></i></span>
       <div class="comment-container">
         <%= render partial: 'comments/form', locals: {parent_id: nil, post: post, comment: Comment.new} %>
       </div>
     </div>
-
   </div>
-
 </div>

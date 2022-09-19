@@ -8,6 +8,10 @@ h4
 }
 li.nav-item {
   margin:0 10px 0 0;
+  a {
+    border: none;
+    background: none;
+  }
 }
 
 
@@ -16,9 +20,7 @@ li.nav-item {
   margin: 0;
   box-sizing: border-box;
 }
-html{
 
-}
 ul, ol{
   list-style: none;
 }
@@ -116,9 +118,15 @@ a{
   padding:0 0 0 0;
   color: black;
 }
-.card-icon i{
-  font-size:x-large;
-  cursor: pointer;
+.card-icon{
+  i{
+    font-size:x-large;
+    cursor: pointer;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
 }
 .card-icon-left{
   justify-content: start;
@@ -135,6 +143,11 @@ a{
   text-align:left;
   margin: .5rem 0;
   font-size:medium;
+}
+.card-time{
+  width: 100%;
+  text-align: left;
+  font-size: small;
 }
 .title-margin{
   margin-right: .4rem;
@@ -243,3 +256,13 @@ a{
     padding: 0;
   }
 }
+
+
+.signup-btn{
+  font-weight: bold;
+  color: #3399ff;
+  background: none;
+  border: none;
+  text-decoration: none;
+}
+

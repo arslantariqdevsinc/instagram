@@ -1,4 +1,3 @@
-<%= turbo_stream_from comment%>
 <%= turbo_frame_tag comment do%>
   <div class = "comment py-3 w-100">
     <div class= "d-flex justify-content-start comment-inner">
@@ -19,13 +18,10 @@
             <%= updated_at.strftime("%B #{updated_at.day.ordinalize}, %Y") %>
           </p>
           <p class = "comment-links">
-            <%= link_to 'Edit', edit_comment_path(comment), data:{turbo: true}%>
-            <%= link_to 'Delete', comment_path(comment), method: :delete, remote: true,data: {confirm: "Are you sure?"} ,class: "mr-2"%>
+            <%= render partial: "comments/conditional_edit_delete", locals: {comment: comment}%>
           </p>
         </div>
       </div>
-
-
     </div>
   </div>
 <%end%>

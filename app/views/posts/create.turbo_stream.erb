@@ -1,3 +1,7 @@
-<%= turbo_stream.prepend "posts" do%>
-  <%= render partial: "posts/list", locals: {post: @post }%>
+<%= turbo_stream.prepend "posts_grid" do%>
+  <%= render partial: "posts/list", locals: {list: @post }%>
+<%end%>
+
+<%= turbo_stream.prepend "posts_feed" do%>
+  <%= render partial: 'shared/post', locals: {post: @post }%>
 <%end%>
