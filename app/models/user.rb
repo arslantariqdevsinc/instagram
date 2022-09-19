@@ -23,16 +23,16 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy,
                                    inverse_of: :followed
 
-  has_many :pending_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy,
-                                   inverse_of: :follower
-  has_many :pending_requests, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy,
-                              inverse_of: :followed
+  # has_many :pending_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy,
+  #                                  inverse_of: :follower
+  # has_many :pending_requests, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy,
+  #                             inverse_of: :followed
 
   has_many :following, -> { where('status = ?', 1) }, through: :active_relationships, source: :followed
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :followers, -> { where('status = ?', 1) }, through: :passive_relationships, source: :follower
 
-  has_many :pending_follows, -> { where('status = ?', 0) }, through: :pending_relationships, source: :followed
-  has_many :follow_requests, -> { where('status = ?', 0) }, through: :pending_requests, source: :follower
+  has_many :pending_follows, -> { where('status = ?', 0) }, through: :active_relationships, source: :followed
+  has_many :follow_requests, -> { where('status = ?', 0) }, through: :passive_relationships, source: :follower
 
   has_many :stories, dependent: :destroy
 

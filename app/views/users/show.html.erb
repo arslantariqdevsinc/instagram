@@ -1,5 +1,5 @@
 <% if user_me?(@user) %>
-  <%= render 'user', user: @user%>
+  <%= render partial: 'user', locals: {user: @user}%>
 
   <%if @user.posts.exists? %>
       <%= render partial: 'shared/grid', locals: {posts: @posts}%>
@@ -11,7 +11,7 @@
   <%end%>
 
 <% else %>
-  <%= render 'other_user', user: @user%>
+  <%= render partial: 'other_user', locals: {user: @user} %>
 
   <div class = "">
     <%if @allowed %>

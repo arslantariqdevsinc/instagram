@@ -24,7 +24,6 @@ class CommentsController < ApplicationController
                                                     partial: 'comments/form',
                                                     locals: { comment: @comment, post: @post })
         end
-        flash.now[:notice] = @comment.errors.full_messages.to_sentence
         format.html { render :new, status: :unprocessable_entity }
       end
     end

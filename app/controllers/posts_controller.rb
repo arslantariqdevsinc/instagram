@@ -25,7 +25,6 @@ class PostsController < ApplicationController
         format.turbo_stream
         format.html { redirect_to posts_path, notice: 'Post has been saved successfully.' }
       else
-        # FIX THIS, INSTEAD OF GOING TO HTML AND RENDERING THE MODAL AGAIN. MAKE IT A TURBO_STREAM RESPONSE LIKE COMMENTS
         format.html { render :new, status: :unprocessable_entity }
       end
     end
