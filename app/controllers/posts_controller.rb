@@ -1,27 +1,30 @@
 class PostsController < ApplicationController
-  before_action :set_user, only: %i[create edit destroy update]
-  before_action :set_post, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[create edit update destroy new]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @posts = Post.all
+    @posts = policy_scope(Post)
   end
 
-  def show; end
+  def show
+    authorize post
+    @comments = post.comments
+  end
 
   def new
-    @post = Post.new
+    @post = current_user.posts.new
+    authorized post
   end
 
   def edit
-    authorize @post
+    authorize post
+    post
   end
 
   def create
-    @post = @user.posts.new(post_params)
-    authorize @post
+    @post = current_user.posts.new(post_params)
+    authorize post
     respond_to do |format|
-      if @post.save
+      if post.save
         format.turbo_stream
         format.html { redirect_to posts_path, notice: 'Post has been saved successfully.' }
       else
@@ -31,11 +34,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    authorize @post
+    authorize post
+    @comments = post.comments
     respond_to do |format|
-      if @post.update(post_params)
+      if post.update(post_params)
         format.turbo_stream
-        format.html { redirect_to post_url(@post), notice: 'Post was successfully updated.' }
+        format.html { redirect_to post_url(post), notice: 'Post was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
@@ -43,8 +47,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    authorize @post
-    @post.destroy
+    authorize post
+    post.destroy
     respond_to do |format|
       format.turbo_stream
       format.html do
@@ -55,15 +59,8 @@ class PostsController < ApplicationController
 
   private
 
-  def set_post
-    @post = Post.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to posts_path
-    nil
-  end
-
-  def set_user
-    @user = current_user
+  def post
+    @post ||= Post.includes(:comments).find(params[:id])
   end
 
   def post_params

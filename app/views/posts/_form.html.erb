@@ -1,15 +1,5 @@
 <%= form_with(model: post, data: {turbo: true}, class:"w-100 h-100") do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render partial: 'shared/form_errors', locals: {record: post }%>
   <div class = "w-100 h-100" data-controller = "image-preview">
     <div class = "post-image-preview p-5"  style = "height: 80%">
       <div id="carouselExampleControls" class="carousel slide w-100 h-100" data-bs-ride="carousel" style = "height: 400px;">

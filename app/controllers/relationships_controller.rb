@@ -3,32 +3,31 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:followed_id])
-    current_user.follow(@user)
-    @status = current_user.following?(@user)
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
+    @relationship = Relationship.new(followed_id: @user.id, follower_id: current_user.id)
+    authorize relationship
+    if relationship.save
+      flash[:notice] = 'Relationship saved successfully.'
+    else
+      flash[:alert] = 'Relationship could not be saved successfully.'
     end
   end
 
   def update
-    @relationship = Relationship.find(params[:id])
-    @relationship.accepted!
-    @user_id = @relationship.follower_id
-
+    authorize relationship
+    relationship.accepted!
+    @user_id = relationship.follower_id
     flash.now[:notice] = 'Request accepted successfully'
-    respond_to do |format|
-      format.js
-    end
   end
 
   def destroy
-    @user = Relationship.find(params[:id]).followed
-    current_user.unfollow(@user)
+    authorize relationship
+    @user = relationship.followed
+    relationship.destroy
+  end
 
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
-    end
+  private
+
+  def relationship
+    @relationship ||= Relationship.find(params[:id])
   end
 end

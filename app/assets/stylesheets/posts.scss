@@ -8,37 +8,36 @@ a{
 
 .post-container {
   position: relative;
-}
-.image {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
 
+  .image{
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
 
-}
+  .middle{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
+  :hover .image{
+    background-color:#000000;
+    opacity:0.6;
+    background-blend-mode: darken;
+  }
 
-.post-container:hover .image {
-  background-color:#000000;
-  opacity:0.6;
-  background-blend-mode: darken;
-}
-
-.post-container:hover .middle {
-  opacity: 1;
+  :hover .middle{
+    opacity: 1;
+  }
 }
 
 .text {
@@ -47,23 +46,26 @@ a{
 }
 
 .modal-dialog {
-  height: 90%; /* = 90% of the .modal-backdrop block = %90 of the screen */
+  height: 90%;
 }
 .modal-content {
-  height: 100%; /* = 100% of the .modal-dialog block */
+  height: 100%;
 }
 
 .post-modal-image{
   background: black;
 }
+
 .post-image{
   position: fixed;
 }
+
 .card-img-container{
   width: 100%;
   // height: 465px;
   background: black;
 }
+
 .position{
   position: relative;
 }

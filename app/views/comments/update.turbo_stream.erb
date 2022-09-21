@@ -1,1 +1,6 @@
-<%= turbo_stream.replace @comment%>
+<%if @comment.errors.any? %>
+  <%= turbo_stream.replace @comment%>
+<%else%>
+ <%= turbo_stream.replace(@comment, partial: 'comments/form', locals: { comment: @comment, post: @post }) %>
+<%end%>
+

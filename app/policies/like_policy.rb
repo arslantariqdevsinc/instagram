@@ -1,8 +1,4 @@
-class StoryPolicy < ApplicationPolicy
-  def new?
-    user.present?
-  end
-
+class LikePolicy < ApplicationPolicy
   def create?
     user.present?
   end

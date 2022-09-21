@@ -1,42 +1,39 @@
 class StoriesController < ApplicationController
-  before_action :set_user, only: %i[create destroy]
-  before_action :set_story, only: %i[destroy]
+  before_action :set_user, only: :index
+
+  def index
+    @stories = @user.stories.all
+  end
 
   def new
-    @story = Story.new
+    @story = current_user.stories.new
+    authorize story
   end
 
   def create
-    @story = @user.stories.new(story_params)
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to story_url(@story), notice: 'Story was successfully created.' }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
+    @story = current_user.stories.new(story_params)
+    authorize story
+    if story.save
+      redirect_to authenticated_root_path, notice: 'Story was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
-    authorize @story
-    @story.destroy
-    respond_to do |format|
-      format.html do
-        redirect_back fallback_location: authenticated_root_path, notice: 'Story was successfully destroyed.'
-      end
-    end
+    authorize story
+    story.destroy
+    redirect_back fallback_location: authenticated_root_path, notice: 'Story was successfully destroyed.'
   end
 
   private
 
-  def set_story
-    @story = Story.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to stories_path
+  def story
+    @story ||= Story.find(params[:id])
   end
 
   def set_user
-    @user = current_user
+    @user = User.find_by!(username: params[:user_id])
   end
 
   def story_params

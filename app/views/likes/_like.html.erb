@@ -1,7 +1,7 @@
 <% unless !user_signed_in? %>
   <% like = current_user.likes.find_by(likeable: likeable) %>
   <% if like.nil? %>
-  <%=button_to(likes_path, class: "simple-btn", remote: true ,params:{ like: {likeable_id: likeable.id,  likeable_type: likeable.class.to_s}}) do%>
+  <%=button_to(post_likes_path(likeable), class: "simple-btn", remote: true ,params:{ like: {likeable_id: likeable.id,  likeable_type: likeable.class.to_s}}) do%>
     <div class = "like-button">
       <span class = "heart-icon"><i class="bi bi-suit-heart"></i></span>
       <p class = "text-sm">
@@ -10,7 +10,7 @@
     </div>
   <% end%>
   <% else %>
-    <%=button_to(like_path(like), class: "simple-btn",remote: true, method: :delete) do%>
+    <%=button_to(post_like_path(likeable, like), class: "simple-btn",remote: true, method: :delete) do%>
     <div class = "like-button">
       <span class = "heart-icon"><i style = "color: red;" class="bi bi-heart-fill"></i></span>
       <p class = "text-sm">

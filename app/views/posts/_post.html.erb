@@ -25,7 +25,7 @@
                 <div>
                   <%= tag.div id: "#{dom_id(@post)}_comments",style: "overflow-y: scroll; max-height: 600px" do %>
                     <%= post.body %>
-                    <%= render @post.comments %>
+                      <%= render partial: "comments/comment", collection: comments, as: :comment%>
                   <%end%>
                 </div>
               </div>

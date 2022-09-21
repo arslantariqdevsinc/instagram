@@ -1,5 +1,5 @@
-
 $("#follow_form").html("<%= escape_javascript(render(partial: 'users/follow_form', locals:{user: @user})) %>");
-<% if @status %>
+<% if @relationship.accepted? %>
   $("#followers").html('<%= @user.followers.count %>');
 <%end%>
+
