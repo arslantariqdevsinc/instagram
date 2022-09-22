@@ -1,2 +1,1 @@
-document.querySelector("#like-button-<%= @likeable.id %>").innerHTML = ("<%= j render partial: 'likes/like',
-                                                                                      locals: { like: @like, likeable: @likeable}  %>")
+<%=render partial: 'likes/update_like', locals: {like: @like, likeable: @likeable}%>

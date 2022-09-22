@@ -15,22 +15,27 @@
   </div>
   <div class="card-data flex-container">
     <div class="card-icons flex-container">
-    <span  class="card-icon card-icon-left">
-      <div id="like-button-<%= post.id %>">
-        <%= render 'likes/like', likeable: post %>
-      </div>
-    </span>
-    <span class="card-icon card-icon-left pb-4">
-      <%= link_to post, data:{turbo: true, turbo_frame: "detail"} do%>
-        <i class="bi bi-chat"></i>
-      <%end%>
-    </span>
+      <span  class="card-icon card-icon-left">
+        <div id="like-button-<%= post.id %>">
+          <%= render 'likes/like', likeable: post %>
+        </div>
+      </span>
+      <span class="card-icon card-icon-left pb-4">
+        <%= link_to post, data:{turbo: true, turbo_frame: "detail"} do%>
+          <i class="bi bi-chat"></i>
+        <%end%>
+      </span>
 
-    <span class="card-icon card-icon-right pb-4 d-flex justify-content-end">
-        <%= render partial: 'posts/conditional_edit_delete', locals: {post: post}%>
-    </span>
+      <span class="card-icon card-icon-right pb-4 d-flex justify-content-end">
+          <%= render partial: 'posts/conditional_edit_delete', locals: {post: post}%>
+      </span>
     </div>
-    <span class="card-text"><span class="bold title-margin"><%= post.user.username %></span><%=post.body%></span>
+    <span class="card-text">
+      <span class="bold title-margin">
+      <%= post.user.username %>
+      </span>
+      <%=post.body%>
+    </span>
     <div class="card-time text-muted">
      <%= date(post) %>
     </div>
@@ -39,8 +44,8 @@
       <%= link_to "See more comments",post, data:{turbo: true, turbo_frame: "detail"} %>
     </span>
 
-    <div class = "w-100">
-      <%= tag.div id: "#{dom_id(post)}_comments" ,style: "overflow-y: scroll; height:100px" do %>
+    <div class = "w-100 ">
+      <%= tag.div id: "#{dom_id(post)}_comments" ,class: "card-comments" do %>
         <%= render post.comments %>
       <%end%>
     </div>

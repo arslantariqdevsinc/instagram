@@ -2,8 +2,19 @@ a{
   text-decoration: none;
 }
 
+
 .col{
   height: 18vw;
+}
+
+.post-form{
+
+  .post-image-preview{
+    height: 80%;
+  }
+  .post-carousel{
+    height: 400px;
+  }
 }
 
 .post-container {
@@ -16,6 +27,12 @@ a{
     height: auto;
     transition: .5s ease;
     backface-visibility: hidden;
+
+    &:hover{
+      background-color:#000000;
+      opacity:0.6;
+      background-blend-mode: darken;
+    }
   }
 
   .middle{
@@ -27,23 +44,33 @@ a{
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
-  }
 
-  :hover .image{
-    background-color:#000000;
-    opacity:0.6;
-    background-blend-mode: darken;
-  }
+    &:hover{
+      opacity: 1;
+      color: black;
 
-  :hover .middle{
-    opacity: 1;
+    }
+    .text {
+      color: white;
+      font-size: 16px;
+    }
   }
 }
 
-.text {
-  color: white;
-  font-size: 16px;
+
+.post-detail{
+  .post-view{
+    p{
+      word-break: break-all;
+      white-space: normal;
+    }
+  }
+  .post-comments{
+    overflow-y: scroll;
+    max-height: 600px;
+  }
 }
+
 
 .modal-dialog {
   height: 90%;

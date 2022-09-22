@@ -1,9 +1,9 @@
-<%= tag.div id:"post_detail#{@post.id}", data: { controller: "post-view" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
+<%= tag.div id:"post_detail#{@post.id}", data: { controller: "post-view" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "post-detail" do %>
   <div class="modal" tabindex="-1">
     <div class="modal-dialog modal-xl modal-dialog-centered">
       <div class="modal-content rounded-0">
-        <div class="modal-body", style= "padding: 0;">
-          <div class = "container w-100 h-100 d-flex" style = "padding: 0">
+        <div class="modal-body p-0">
+          <div class = "container w-100 h-100 d-flex p-0">
             <div class = "col-7 post-modal-image">
               <div class = "w-100 h-100">
                 <% if post.images.any? %>
@@ -15,7 +15,7 @@
             </div>
             <div class = "col h-100 border-2 position">
               <div class = "px-4">
-                <div class="modal-header py-4" style= "padding: 0">
+                <div class="modal-header py-4 p-0">
                   <div class= "d-flex justify-content-between align-items-center ">
                     <%=render partial: 'shared/avatar', locals: {user: post.user, size: 30}%>
                     <h6 class="modal-title px-2"> <strong><%= post.user.username %></strong></h6>
@@ -23,8 +23,10 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div>
-                  <%= tag.div id: "#{dom_id(@post)}_comments",style: "overflow-y: scroll; max-height: 600px" do %>
-                    <%= post.body %>
+                  <div class = "post-body">
+                    <p><%= post.body%></p>
+                  </div>
+                  <%= tag.div id: "#{dom_id(@post)}_comments", class: "post-comments" do %>
                       <%= render partial: "comments/comment", collection: comments, as: :comment%>
                   <%end%>
                 </div>
@@ -33,9 +35,10 @@
                <div class = "like-comment-container">
                 <div class = "w-100">
                   <div class = "d-flex px-4 pb-5 pt-1 border-start border-top justify-content-between">
-                    <div id="like-button-<%= post.id %>">
+                    <div id="like-button-detail-<%= post.id %>">
                       <%= render 'likes/like', likeable: post %>
                     </div>
+
                   <%= render partial: 'posts/conditional_edit_delete', locals: {post: post}%>
                   </div>
                   <div class="add-comment-container px-4">

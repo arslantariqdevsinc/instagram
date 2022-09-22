@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
-    authorized post
+    authorize post
   end
 
   def edit
@@ -60,7 +60,7 @@ class PostsController < ApplicationController
   private
 
   def post
-    @post ||= Post.includes(:comments).find(params[:id])
+    @post ||= Post.includes(:comments, :user).find(params[:id])
   end
 
   def post_params

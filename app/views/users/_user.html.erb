@@ -1,54 +1,33 @@
 <div>
-  <div class= "container pb-5 border-bottom d-flex", style = "width:70%">
+  <div class= "profile-header container pb-5 border-bottom d-flex">
     <div class = "col d-flex justify-content-center">
        <div class = "profile-image ">
           <%= image_tag user_avatar(user, 200), class: "rounded-circle border border-5 img-fluid" %>
       </div>
     </div>
     <div class = "col-9 d-flex justify-content-center">
-      <div class = "profile d-flex justify-content-evenly", style = "width: 60%">
+      <div class = "profile d-flex justify-content-evenly">
         <div class = "w-100">
           <div class="profile-user-settings d-flex justify-content-between">
-
             <h1 class="profile-user-name display-6">
               <%=user.username%>
             </h1>
-            <div class= "d-flex align-items-center justify-content-between px-2">
-              <%= link_to 'Edit Profile',  edit_user_registration_path , class: "btn btn-outline-secondary btn-sm mx-2"%>
-            </div>
+            <%if user_me?(user)%>
+              <div class= "d-flex align-items-center justify-content-between px-2">
+                <%= link_to 'Edit Profile',  edit_user_registration_path , class: "btn btn-outline-secondary btn-sm mx-2"%>
+              </div>
+            <%else%>
+              <div class= "d-flex align-items-center justify-content-between px-2">
+                <%= link_to 'Message',  "#" , class: "btn btn-outline-secondary btn-sm mx-2 disabled"%>
+                <%= render partial: 'follow_form', locals: {user: user} %>
+              </div>
+            <%end%>
           </div>
-
-          <div class="profile-stats", style= "width:80%">
-
-            <ul class= "d-flex justify-content-between ">
-              <li><p><b><%= user.posts.count %></b> posts</p></li>
-              <li><p><b id = "followers"><%=user.followers.count%></b>
-                  <%= link_to "followers",followers_user_path(@user) %>
-              </p></li>
-              <li><p><b id="following"><%=user.following.count%></b>
-                  <%= link_to "following",following_user_path(@user) %>
-              </p></li>
-            </ul>
-
-          </div>
-
-
-          <div class="profile-bio">
-
-            <p class="profile-real-name"><b><%=user.fullname%></b></p>
-            <p class="profile-bio"><%=user.bio%></p>
-            <p class="profile-website"><a href = <%=user.website%>><%=user.website%></a></p>
-
-          </div>
-
+            <%= render partial: 'users/stats', locals:{user: user}%>
+            <%= render partial: 'users/profile_bio', locals:{user: user}%>
         </div>
-
       </div>
-
     </div>
   </div>
-
-
-
 </div>
 

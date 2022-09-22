@@ -2,7 +2,7 @@
   <div class="login">
 
     <div class = "inner-login">
-      <h1><img src="https://i.imgur.com/wvLiKam.png" width="200px" height="68px"></h1>
+      <h1><%= render partial: 'shared/brand', locals:{size: '200x68'}%></h1>
 
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div class="field">
@@ -28,9 +28,6 @@
         <% end %>
 
         <div class="divider"><b>OR</b></div>
-
-        <div class="fbwrapper"><div class="fb"><a href="https://facebook.com"><img src="https://i.imgur.com/exksovo.png">  Log in with Facebook</a></div></div>
-
         <div class="forgotwrapper">
           <div class="forgot">
             <%= render "devise/shared/forgot_password" , class: "forgotwrapper" %>

@@ -1,14 +1,14 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav" style = "padding:0">
-  <div class="container" style= "width:60%">
-    <a class="navbar-brand" href="#">
-      <%= image_tag 'https://i.imgur.com/wvLiKam.png', size: "120x58" , class:"navbar-brand" %>
-    </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light custom-nav">
+  <div class="container">
+    <%= link_to authenticated_root_path do%>
+        <%= render partial: 'shared/brand', locals: {size: '120x58'}%>
+    <%end%>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse " id="navbarSupportedContent">
-      <div class="d-flex justify-content-center" style= "width:80%">
+      <div class="navbar-search d-flex justify-content-center">
           <%= render "main/search", class: "d-flex form-inline" %>
       </div>
       <%= render partial: "shared/navbar_partial"%>

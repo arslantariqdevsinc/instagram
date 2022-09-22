@@ -1,0 +1,10 @@
+var like_button = document.querySelector("#like-button-<%= @likeable.id %>")
+var like_button_detail = document.querySelector("#like-button-detail-<%= @likeable.id %>")
+if (like_button !== null)
+{
+  like_button.innerHTML = ("<%= j render partial: 'likes/like', locals: { like: @like, likeable: @likeable}  %>")
+}
+if (like_button_detail !== null)
+{
+  like_button_detail.innerHTML = ("<%= j render partial: 'likes/like', locals: { like: @like, likeable: @likeable}  %>")
+}

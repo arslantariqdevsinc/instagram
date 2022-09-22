@@ -1,18 +1,13 @@
+<%= render partial: 'user', locals: {user: @user}%>
 <% if user_me?(@user) %>
-  <%= render partial: 'user', locals: {user: @user}%>
-
   <%if @user.posts.exists? %>
       <%= render partial: 'shared/grid', locals: {posts: @posts}%>
   <%else%>
     <div class = "text-center">
-
       <h6>Start capturing and sharing your moments.</h6>
     </div>
   <%end%>
-
 <% else %>
-  <%= render partial: 'other_user', locals: {user: @user} %>
-
   <div class = "">
     <%if @allowed %>
       <%if @user.posts.exists?  %>

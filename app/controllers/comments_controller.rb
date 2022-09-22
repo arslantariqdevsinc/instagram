@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
 
   def comment
     # Should I scope this to user?
-    @comment ||= Comment.find(params[:id])
+    @comment ||= Comment.includes(:user).find(params[:id])
   end
 
   def comment_params

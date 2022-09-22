@@ -4,8 +4,7 @@
       <div>
         <%=render partial: 'shared/avatar', locals: {user: comment.user, size: 30}%>
       </div>
-
-      <div class = "px-2 comment-info" style = "width: 100%">
+      <div class = "px-2 comment-info w-100">
         <p class="modal-title text-wrap">
          <strong><%= comment.user.username %></strong>
          <span>

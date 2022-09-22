@@ -1,10 +1,10 @@
-<%= form_with(model: post, data: {turbo: true}, class:"w-100 h-100") do |form| %>
+<%= form_with(model: post, data: {turbo: true}, class:"w-100 h-100 post-form") do |form| %>
   <%= render partial: 'shared/form_errors', locals: {record: post }%>
   <div class = "w-100 h-100" data-controller = "image-preview">
-    <div class = "post-image-preview p-5"  style = "height: 80%">
-      <div id="carouselExampleControls" class="carousel slide w-100 h-100" data-bs-ride="carousel" style = "height: 400px;">
+    <div class = "post-image-preview p-5">
+      <div id="carouselExampleControls" class="post-carousel carousel slide w-100 h-100" data-bs-ride="carousel">
         <div class="carousel-inner w-100 h-100" data-image-preview-target = "output">
-
+          <%# This will be populated by controller %>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -16,13 +16,10 @@
         </button>
       </div>
     </div>
-
     <%= form.file_field :images, id: "files", multiple: true, class:"form-control", required: true, data: {image_preview_target: "input", action: "input->image-preview#readURL" }%>
-
     <div class="field">
-      <%= form.text_field :body ,data: {action: "input->image-preview#Test" },class: "form-control", placeholder: "Write something", required: true%>
+      <%= form.text_field :body, class: "form-control", placeholder: "Write something", required: true%>
     </div>
-
     <div class="actions">
       <%= form.submit "Post", class:"btn btn-primary"%>
     </div>

@@ -1,4 +1,5 @@
 .profile-stats{
+  width: 80% !important;
   font-size: large;
   ul{
     padding:0;
@@ -37,4 +38,11 @@
   }
 }
 
+.profile-header{
+  width: 70% !important;
+
+  .profile{
+    width: 60% !important;
+  }
+}
 

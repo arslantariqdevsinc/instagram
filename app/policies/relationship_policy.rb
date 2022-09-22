@@ -14,7 +14,7 @@ class RelationshipPolicy < ApplicationPolicy
   private
 
   def initiator
-    relationship.follower == user if user.present?
+    relationship.follower == user || relationship.followed == user if user.present?
   end
 
   def relationship

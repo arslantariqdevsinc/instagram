@@ -20,3 +20,13 @@ p {
   word-break: break-all;
   white-space: normal;
 }
+
+.comment-form{
+  .new-comment{
+    outline:none;
+  }
+  .submit-comment{
+    color: blue;
+    width:100%;
+  }
+}

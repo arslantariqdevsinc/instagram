@@ -10,4 +10,9 @@ module ApplicationHelper
   def date(record)
     record.created_at.strftime('%B %d, %Y')
   end
+
+  def pluralize_count(count, type)
+    pluralize(count, type)
+  end
+
 end
