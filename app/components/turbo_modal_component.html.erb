@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-  <%= tag.div data: { controller: "turbo-modal" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-action= "turbo-modal#">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
@@ -18,8 +18,3 @@
     </div>
   <% end %>
 <% end %>
-
-
-
-
-

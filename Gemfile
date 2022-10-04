@@ -24,10 +24,6 @@ gem 'uglifier'
 gem 'view_component', '~> 2.71'
 gem 'webpacker', '~> 4.0'
 
-group :development, :test do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
-end
-
 group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
@@ -42,8 +38,13 @@ group :test do
 end
 
 group :development, :test do
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rubocop'
-  gem 'rubocop-minitest'
+  # gem 'rubocop-minitest'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
+
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'factory_bot_rails'
 end

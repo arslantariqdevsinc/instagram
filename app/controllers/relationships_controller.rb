@@ -16,12 +16,14 @@ class RelationshipsController < ApplicationController
     authorize relationship
     relationship.accepted!
     @user_id = relationship.follower_id
+
     flash.now[:notice] = 'Request accepted successfully'
   end
 
   def destroy
     authorize relationship
     @user = relationship.followed
+
     relationship.destroy
   end
 

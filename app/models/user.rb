@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   attr_writer :login
 
-  scope :with_story, -> { where('EXISTS(SELECT 1 FROM stories WHERE user_id = users.id)') }
-
   has_one_attached :avatar
   has_many :posts, dependent: :destroy
   has_many :stories, dependent: :destroy
@@ -25,6 +23,9 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
   validate :validate_username
+
+  scope :suggestions, ->(user_id) { where('id NOT IN (?)', following_ids.push(user_id)) }
+  scope :with_story, -> { where('EXISTS(SELECT 1 FROM stories WHERE user_id = users.id)') }
 
   def to_param
     username
@@ -58,7 +59,9 @@ class User < ApplicationRecord
   end
 
   def validate_username
-    errors.add(:username, :invalid) if User.where(email: username).exists?
+    return unless User.exists?(email: username)
+
+    errors.add(:username, :invalid)
   end
 
   def following?(user)
@@ -69,20 +72,12 @@ class User < ApplicationRecord
     pending_follows.include?(user)
   end
 
-  def suggestions
-    ids = following_ids
-    ids << id
-    User.where('id NOT IN (?)', ids).first(5)
-  end
-
   def generate_posts
     following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
     Post.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
   def generate_stories
-    users_with_stories = following.with_story
-    users_with_stories = Array(users_with_stories)
-    stories.any? ? users_with_stories << self : users_with_stories
+    following.with_story.to_a.push(stories.any? ? self : nil).compact
   end
 end

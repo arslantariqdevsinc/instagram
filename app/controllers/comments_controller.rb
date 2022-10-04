@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
   before_action :set_post, only: %i[create]
 
   def create
-    authorize @post, :show? # {authorize post before creating comment? neccessary?}
-    @comment = @post.comments.new(comment_params)
+    authorize @post, :show?
+    @comment = @post.comments.new(comment_params.merge(user: current_user))
     authorize comment
     respond_to do |format|
       if comment.save
@@ -49,7 +49,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :post_id, :parent_id).merge(user: current_user)
+    params.require(:comment).permit(:body, :post_id, :parent_id)
   end
 
   def set_post

@@ -37,7 +37,7 @@ class ApplicationPolicy
   end
 
   def owner?
-    return true if user.present? && user == record.user
+    user.present? && user == record.user
   end
 
   class Scope

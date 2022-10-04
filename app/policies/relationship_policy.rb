@@ -4,16 +4,16 @@ class RelationshipPolicy < ApplicationPolicy
   end
 
   def update?
-    initiator
+    initiator?
   end
 
   def destroy?
-    initiator
+    initiator?
   end
 
   private
 
-  def initiator
+  def initiator?
     relationship.follower == user || relationship.followed == user if user.present?
   end
 

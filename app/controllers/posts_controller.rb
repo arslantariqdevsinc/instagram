@@ -17,12 +17,12 @@ class PostsController < ApplicationController
 
   def edit
     authorize post
-    post
   end
 
   def create
     @post = current_user.posts.new(post_params)
     authorize post
+
     respond_to do |format|
       if post.save
         format.turbo_stream
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if post.update(post_params)
         format.turbo_stream
-        format.html { redirect_to post_url(post), notice: 'Post was successfully updated.' }
+        format.html { redirect_to post_path(post), notice: 'Post was successfully updated.' }
       else
         format.html { render :edit, status: :unprocessable_entity }
       end
