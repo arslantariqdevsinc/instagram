@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_112041) do
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string "body"
+    t.string "body", limit: 2200, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false

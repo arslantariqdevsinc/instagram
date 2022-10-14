@@ -14,5 +14,4 @@ module ApplicationHelper
   def pluralize_count(count, type)
     pluralize(count, type)
   end
-
 end
