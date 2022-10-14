@@ -4,7 +4,7 @@ class Relationship < ApplicationRecord
 
   enum status: { pending: 0, accepted: 1 }
 
-  validates :status, inclusion: { in: %w[pending accepted] }
+  # validates :status, inclusion: { in: %w[pending accepted] }
 
   before_validation :set_status
 

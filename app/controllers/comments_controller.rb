@@ -3,17 +3,20 @@ class CommentsController < ApplicationController
   before_action :set_post, only: %i[create]
 
   def create
-    authorize @post, :show?
     @comment = @post.comments.new(comment_params.merge(user: current_user))
     authorize comment
     respond_to do |format|
       if comment.save
         format.html { redirect_to @post, notice: 'Comment was successfully created.' }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { redirect_to @post, notice: 'Comment was not created.'  }
       end
       format.turbo_stream
     end
+  end
+
+  def edit
+    authorize comment
   end
 
   def update
@@ -28,10 +31,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-    authorize comment
-  end
-
   def destroy
     authorize comment
     comment.destroy
@@ -44,7 +43,6 @@ class CommentsController < ApplicationController
   private
 
   def comment
-    # Should I scope this to user?
     @comment ||= Comment.includes(:user).find(params[:id])
   end
 

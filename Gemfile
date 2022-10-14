@@ -40,11 +40,12 @@ end
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rubocop'
-  # gem 'rubocop-minitest'
+  gem 'rubocop-minitest'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
 
+  gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'shoulda-matchers', '~> 5.0'
-  gem 'factory_bot_rails'
 end
+gem 'simplecov', require: false, group: :test
