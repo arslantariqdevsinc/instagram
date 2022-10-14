@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(version: 2022_09_13_112041) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.string "body"
-    t.integer "post_id"
+    t.string "body", limit: 220, null: false
+    t.integer "post_id", null: false
     t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_112041) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "body"
+    t.string "body", limit: 2200, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_112041) do
   end
 
   create_table "stories", force: :cascade do |t|
-    t.string "body"
+    t.string "body", limit: 2200, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_112041) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "username"
+    t.string "username", default: "", null: false
     t.string "fullname"
     t.string "bio"
     t.string "website"

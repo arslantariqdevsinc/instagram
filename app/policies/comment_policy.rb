@@ -1,6 +1,10 @@
 class CommentPolicy < ApplicationPolicy
-  def index?
-    true
+  def create?
+    user.present?
+  end
+
+  def edit?
+    owner?
   end
 
   def update?

@@ -1,35 +1,22 @@
-<%= form_with(model: story, data: {turbo: "true"}, class:"w-100 h-100") do |form| %>
-  <% if story.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(story.errors.count, "error") %> prohibited this post from being saved:</h2>
+<%= form_with(model: [current_user, story],local: true, class:"w-100 h-100") do |form| %>
+  <%= render partial: "shared/form_errors", locals: {record: story}%>
 
-      <ul>
-      <% story.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
   <div class = "w-100 h-100" data-controller = "image-preview">
     <div class = "post-image-preview p-5"  style = "height: 80%">
       <div id="carouselExampleControls" class="carousel slide w-100 h-100" data-bs-ride="carousel" style = "height: 400px;">
-        <div class="carousel-inner w-100 h-100" data-image-preview-target = "output">
-
-        </div>
+        <div class="carousel-inner w-100 h-100" data-image-preview-target = "output"></div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
         </button>
       </div>
     </div>
 
     <%= form.file_field :attachment, id: "files", class:"form-control", required: true, data: {image_preview_target: "input", action: "input->image-preview#readURL" }%>
-
     <div class="field">
+
       <%= form.text_field :body ,data: {action: "input->image-preview#Test" },class: "form-control", placeholder: "Write something"%>
     </div>
 

@@ -1,16 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
-
-// Connects to data-controller="image-preview"
-
 export default class extends Controller {
-  static targets = [ "output", "input","test" ]
-
-  connect(){
-    console.log("connected")
-  }
-  Test(e){
-    console.log("Testing")
-  }
+  static targets = [ "output", "input" ]
 
   readURL() {
     var input = this.inputTarget
@@ -18,9 +8,7 @@ export default class extends Controller {
 
 
     function readAndPreview(file) {
-
-      // Make sure `file.name` matches our extensions criteria
-      if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+      if (/\.(jpe?g|png)$/i.test(file.name)) {
         const reader = new FileReader();
 
         reader.addEventListener("load", () => {
@@ -28,10 +16,7 @@ export default class extends Controller {
           image.height = 100;
           image.title = file.name;
           image.src = reader.result;
-          image.classList.add("d-block", "w-100", "h-100", "img-fluid");
-          // imageInfo = document.createElement("div");
-          // image.appendChild()
-
+          image.classList.add('d-block', 'w-100', 'h-100', 'img-fluid');
           var carouselItem = document.createElement("div");
           carouselItem.classList.add("carousel-item");
           if(output.childElementCount == 0){
@@ -45,11 +30,8 @@ export default class extends Controller {
       }
     }
 
-
-   if (input.files) {
-
+  if (input.files) {
     Array.prototype.forEach.call(input.files, readAndPreview);
-    }
+  }
  }
-
 }

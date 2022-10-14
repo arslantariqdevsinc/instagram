@@ -1,8 +1,0 @@
-<div class="d-flex justify-content-start align-items-center border mb-4 py-4 px-2 rounded-2 stories-container">
-  <div class=  "text-center d-flex align-items-center">
-    <%= link_to new_story_path, data:{turbo: true, turbo_frame: "modal"}, class:"display-2 px-2" do %>
-      <i class="bi bi-plus-circle"></i>
-    <%end%>
-  </div>
-  <%= render partial: "shared/story_noti", collection: users, as: :user%>
-</div>

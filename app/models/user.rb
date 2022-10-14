@@ -1,40 +1,31 @@
 class User < ApplicationRecord
   attr_writer :login
 
-  scope :with_story, -> { where('EXISTS(SELECT 1 FROM stories WHERE user_id = users.id)') }
-
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
-
-  validates :email, presence: true, uniqueness: true
-  validates :username, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
-
-  validate :validate_username
-
   has_one_attached :avatar
   has_many :posts, dependent: :destroy
+  has_many :stories, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-
   has_many :active_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy,
                                   inverse_of: :follower
   has_many :passive_relationships, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy,
                                    inverse_of: :followed
-
-  # has_many :pending_relationships, class_name: 'Relationship', foreign_key: 'follower_id', dependent: :destroy,
-  #                                  inverse_of: :follower
-  # has_many :pending_requests, class_name: 'Relationship', foreign_key: 'followed_id', dependent: :destroy,
-  #                             inverse_of: :followed
-
   has_many :following, -> { where('status = ?', 1) }, through: :active_relationships, source: :followed
   has_many :followers, -> { where('status = ?', 1) }, through: :passive_relationships, source: :follower
-
   has_many :pending_follows, -> { where('status = ?', 0) }, through: :active_relationships, source: :followed
   has_many :follow_requests, -> { where('status = ?', 0) }, through: :passive_relationships, source: :follower
 
-  has_many :stories, dependent: :destroy
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+
+  validates :avatar, content_type: 'image/png',
+                     dimension: { width: 200, height: 200 }
+  validates :email, presence: true, uniqueness: true
+  validates :username, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
+  validate :validate_username
+
+  scope :suggestions, ->(user_id) { where('id NOT IN (?)', following_ids.push(user_id)) }
+  scope :with_story, -> { where('EXISTS(SELECT 1 FROM stories WHERE user_id = users.id)') }
 
   def to_param
     username
@@ -68,30 +59,17 @@ class User < ApplicationRecord
   end
 
   def validate_username
-    errors.add(:username, :invalid) if User.where(email: username).exists?
+    return unless User.exists?(email: username)
+
+    errors.add(:username, :invalid)
   end
 
-  def follow(other_user)
-    status = other_user.is_private? ? :pending : :accepted
-    active_relationships.create(followed_id: other_user.id, status: status)
+  def following?(user)
+    following.include?(user)
   end
 
-  def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
-  end
-
-  def following?(other_user)
-    following.include?(other_user)
-  end
-
-  def requested?(other_user)
-    pending_follows.include?(other_user)
-  end
-
-  def suggestions
-    ids = following_ids
-    ids << id
-    User.where('id NOT IN (?)', ids).first(5)
+  def requested?(user)
+    pending_follows.include?(user)
   end
 
   def generate_posts
@@ -100,8 +78,6 @@ class User < ApplicationRecord
   end
 
   def generate_stories
-    users_with_stories = following.with_story
-    users_with_stories = Array(users_with_stories)
-    stories.any? ? users_with_stories << self : users_with_stories
+    following.with_story.to_a.push(stories.any? ? self : nil).compact
   end
 end

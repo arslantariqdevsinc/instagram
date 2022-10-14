@@ -1,9 +1,8 @@
-
 <div>
   <nav class="navbar bg-light custom-nav shadow-sm  bg-body">
-    <div class="container-fluid" style= "width: 50%">
+    <div class="container-fluid">
       <a href = "/">
-        <%= image_tag 'https://i.imgur.com/wvLiKam.png', size: "120x58" , class:"navbar-brand" %>
+        <%= render partial: 'shared/brand', locals: {size: '120x58'}%>
       </a>
     </div>
   </nav>

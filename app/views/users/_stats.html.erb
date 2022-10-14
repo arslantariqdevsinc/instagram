@@ -1,0 +1,11 @@
+ <div class="profile-stats">
+  <ul class= "d-flex justify-content-between ">
+    <li><p><b><%= user.posts.count %></b> posts</p></li>
+    <li><p><b id = "followers"><%=user.followers.count%></b>
+        <%= link_to "followers",followers_user_path(user) %>
+    </p></li>
+    <li><p><b id="following"><%=user.following.count%></b>
+        <%= link_to "following",following_user_path(user) %>
+    </p></li>
+  </ul>
+</div>

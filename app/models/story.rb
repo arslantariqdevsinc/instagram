@@ -2,13 +2,8 @@ class Story < ApplicationRecord
   belongs_to :user
   has_one_attached :attachment
 
-  validate :attachment_presence
-
-  private
-
-  def attachment_presence
-    errors.add(:attachment, 'is missing') unless attachment.attached?
-  end
+  validates :body, presence: true, length: { maximum: 2200 }
+  validates :attachment, attached: true
 
   after_create_commit lambda {
     StoriesCleanupJob.set(wait: 24.hours).perform_later(id)

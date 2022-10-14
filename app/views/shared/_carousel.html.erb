@@ -1,16 +1,13 @@
-<div id="carouselExampleControls" class="carousel slide w-100 h-100" data-bs-ride="carousel">
+<div id="carouselExampleControls" class="post-carousel carousel slide w-100 h-100" data-bs-ride="carousel">
   <div class="carousel-inner w-100 h-100  d-flex align-items-center ">
-
-    <div class="carousel-item active" style = "background: black">
-      <%= image_tag(images.first, class: "img-fluid d-block w-100", style: "max-height:800px") %>
+    <div class="carousel-item active">
+      <%= image_tag(images.first, class: "carousel-image img-fluid d-block w-100") %>
     </div>
-
     <% images.drop(1).each do |image| %>
-      <div class="carousel-item" style = "background: black">
-        <%= image_tag(image, class: "img-fluid d-block w-100", style:"max-height:800px") %>
+      <div class="carousel-item">
+        <%= image_tag(image, class: "carousel-image img-fluid d-block w-100") %>
       </div>
     <%end%>
-
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>

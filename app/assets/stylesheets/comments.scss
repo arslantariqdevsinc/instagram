@@ -4,12 +4,10 @@
 
 
 .comment-links{
-
   a{
     text-decoration: none;
     color: grey;
   }
-
 }
 
 .comment-date{
@@ -17,7 +15,18 @@
   font-weight: 100;
   font-size:small
 }
+
 p {
   word-break: break-all;
   white-space: normal;
+}
+
+.comment-form{
+  .new-comment{
+    outline:none;
+  }
+  .submit-comment{
+    color: blue;
+    width:100%;
+  }
 }

@@ -12,15 +12,12 @@
       <div class = "middle">
         <div class="text d-flex justify-content-between">
           <div id = "likes-post-count-<%=list.id%>">
-            <%= render partial: "posts/like_count", locals: { count: list.likes.count } %>
+            <%= pluralize_count(list.likes.count, 'like') %>
           </div>
           <div id = "comments-post-count<%=list.id%>">
-            <%= render partial: "posts/comment_count", locals: {count: list.comments.count }%>
+            <%= pluralize_count(list.comments.count, 'comment') %>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-
-<%# dont need to check if image exists because it will always exist? %>

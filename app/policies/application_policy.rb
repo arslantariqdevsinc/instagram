@@ -37,7 +37,7 @@ class ApplicationPolicy
   end
 
   def owner?
-    return true if user.present? && user == record.user
+    user.present? && user == record.user
   end
 
   class Scope
@@ -47,7 +47,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      raise NotImplementedError, "You must define #resolve in #{self.class}"
+      scope
     end
 
     private

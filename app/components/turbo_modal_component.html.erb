@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
-  <%= tag.div data: { controller: "turbo-modal" ,action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
+  <%= tag.div data: { controller: "turbo-modal", action: "turbo:submit-end->turbo-modal#submitEnd" }, class: "" do %>
     <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-action= "turbo-modal#">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
@@ -12,17 +12,9 @@
           <div class="modal-body d-flex justify-content-center align-items-center">
               <%= content %>
           </div>
-          <%# <div class="modal-footer">
-            <%= button_tag "Close", data: { action: "turbo-modal#hideModal", bs_dismiss: "modal" }, type: "button", class: "btn" %>
-            <%# <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> %>
           </div>
         </div>
       </div>
     </div>
   <% end %>
 <% end %>
-
-
-
-
-

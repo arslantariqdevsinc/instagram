@@ -2,68 +2,97 @@ a{
   text-decoration: none;
 }
 
+
 .col{
   height: 18vw;
 }
 
+.post-form{
+
+  .post-image-preview{
+    height: 80%;
+  }
+  .post-carousel{
+    height: 400px;
+  }
+}
+
 .post-container {
   position: relative;
+
+  .image{
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+
+    &:hover{
+      background-color:#000000;
+      opacity:0.6;
+      background-blend-mode: darken;
+    }
+  }
+
+  .middle{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+
+    &:hover{
+      opacity: 1;
+      color: black;
+
+    }
+    .text {
+      color: white;
+      font-size: 16px;
+    }
+  }
 }
-.image {
-  opacity: 1;
-  display: block;
-  width: 100%;
-  height: auto;
-  transition: .5s ease;
-  backface-visibility: hidden;
 
 
+.post-detail{
+  .post-view{
+    p{
+      word-break: break-all;
+      white-space: normal;
+    }
+  }
+  .post-comments{
+    overflow-y: scroll;
+    max-height: 600px;
+  }
 }
 
-.middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-.post-container:hover .image {
-  background-color:#000000;
-  opacity:0.6;
-  background-blend-mode: darken;
-}
-
-.post-container:hover .middle {
-  opacity: 1;
-}
-
-.text {
-  color: white;
-  font-size: 16px;
-}
 
 .modal-dialog {
-  height: 90%; /* = 90% of the .modal-backdrop block = %90 of the screen */
+  height: 90%;
 }
 .modal-content {
-  height: 100%; /* = 100% of the .modal-dialog block */
+  height: 100%;
 }
 
 .post-modal-image{
   background: black;
 }
+
 .post-image{
   position: fixed;
 }
+
 .card-img-container{
   width: 100%;
   // height: 465px;
   background: black;
 }
+
 .position{
   position: relative;
 }

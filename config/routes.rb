@@ -1,33 +1,31 @@
 Rails.application.routes.draw do
-  require 'sidekiq/web'
-  mount Sidekiq::Web => '/sidekiq'
-
   devise_for :users, path: 'accounts'
-
-  resources :likes, only: %i[create destroy]
 
   devise_scope :user do
     authenticated :user do
-      root 'users#feed', as: :authenticated_root
+      root 'feeds#show', as: :authenticated_root
     end
+
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
 
-  resources :comments, only: %i[edit destroy]
-
-  resources :posts do
-    resources :comments, except: %i[edit destroy]
-  end
-  resources :stories, except: [:index]
-
   resources :users, only: %i[index show] do
     member do
       get :following, :followers
-      get :stories
     end
+
+    resources :stories, only: %i[new index create]
   end
+
+  resources :stories, only: :destroy
+
+  resources :posts do
+    resources :comments, shallow: true, except: %i[new index show]
+    resources :likes, only: %i[create destroy]
+  end
+
   resources :relationships, only: %i[create destroy update]
 
   get :search, to: 'main#search'

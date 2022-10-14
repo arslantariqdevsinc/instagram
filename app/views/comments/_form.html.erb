@@ -1,25 +1,13 @@
 <% model = [local_assigns[:post], comment].compact %>
-<%= form_with(model: model, id: dom_id_for_records(*model), data: {turbo: true}) do |form| %>
-  <% if comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% comment.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: model, id: dom_id_for_records(*model), class: "comment-form", data: {turbo: true}) do |form| %>
+  <%= render partial: 'shared/form_errors', locals: {record: comment}%>
   <div class = "d-flex">
     <div class="field w-100 h-100">
-      <%= form.text_field :body,placeholder: "Add a comment...", class: "border-0 w-100 h-100", required: true,  style: "width:100%; outline:none;"%>
+      <%= form.text_field :body,placeholder: "Add a comment...", class: "new-comment border-0 w-100 h-100"%>
     </div>
     <div class="actions">
-      <%= form.submit 'Post',class: "simple-btn", style: "color: blue; width:100%"%>
+      <%= form.submit 'Post',class: "simple-btn submit-comment"%>
     </div>
   </div>
-
   <%= link_to 'Cancel', comment, class: "btn btn-link" if form.object.persisted? %>
 <% end %>
