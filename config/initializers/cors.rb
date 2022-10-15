@@ -5,6 +5,8 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
+Rails.application.config.hosts << "634af639751fdb5235af0fb9--sprightly-griffin-790716.netlify.app"
+
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
