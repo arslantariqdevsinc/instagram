@@ -1,9 +1,6 @@
 Rails.application.configure do
 
-  config.hosts << "634af639751fdb5235af0fb9--sprightly-griffin-790716.netlify.app"
   config.hosts << "hostname"
-  config.hosts.clear
-
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
