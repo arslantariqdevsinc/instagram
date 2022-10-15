@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
 
-    resources :stories, only: %i[new index create]
+    resources :stories, only: %i[new index show create]
   end
 
   resources :stories, only: :destroy

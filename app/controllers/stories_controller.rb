@@ -3,7 +3,18 @@ class StoriesController < ApplicationController
 
   def index
     @stories = @user.stories.all
+    respond_to do |format|
+      format.html
+      format.json do
+        render json: @stories
+      end
+    end
   end
+
+  def show
+    render json: story.as_json.merge({ attachment: url_for(story.attachment) })
+  end
+
 
   def new
     @story = current_user.stories.new
