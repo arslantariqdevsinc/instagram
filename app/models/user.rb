@@ -18,8 +18,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :avatar, content_type: 'image/png',
-                     dimension: { width: 200, height: 200 }
+  validates :avatar, content_type: 'image/png'
   validates :email, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true, format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
   validate :validate_username

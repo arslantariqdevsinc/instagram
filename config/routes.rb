@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost", :port => 3001
   devise_for :users, path: 'accounts'
 
   devise_scope :user do

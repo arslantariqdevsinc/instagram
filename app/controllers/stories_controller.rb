@@ -12,7 +12,7 @@ class StoriesController < ApplicationController
   end
 
   def show
-    render json: story.as_json.merge({ attachment: url_for(story.attachment) })
+    render json: story
   end
 
 
@@ -45,6 +45,9 @@ class StoriesController < ApplicationController
 
   def set_user
     @user = User.find_by!(username: params[:user_id])
+
+    rescue ActiveRecord::RecordNotFound
+      render  json: { error: "resource not found" }, status: :not_found
   end
 
   def story_params

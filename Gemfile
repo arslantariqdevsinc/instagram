@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 gem 'active_storage_validations'
+gem 'active_model_serializers'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'gravatar_image_tag'

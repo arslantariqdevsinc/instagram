@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: %i[following]
+  before_action :authenticate_user!, only: %i[show following]
 
   def index
-    @users = User.all
-    render json: @users
+    render json: User.all
   end
 
   def show
@@ -13,18 +12,21 @@ class UsersController < ApplicationController
                  user.public?
                end
     @posts = user.posts.all if @allowed
+    respond_to do |format|
+      format.html
+      format.json { render json: user }
+    end
   end
 
   def following
-    # authorize user
+    authorize user
     @title = 'Following'
     @users = user.following
-    byebug
-
     respond_to do |format|
       format.html { render template: 'users/show_follow'}
       format.json { render json: @users }
     end
+
   end
 
   def followers
@@ -35,6 +37,10 @@ class UsersController < ApplicationController
       format.html { render template: 'users/show_follow'}
       format.json { render json: @users }
     end
+
+    rescue ActiveRecord::RecordNotFound
+      render  json: { error: "resource not found" }, status: :not_found
+
   end
 
 
